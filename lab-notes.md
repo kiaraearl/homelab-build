@@ -128,3 +128,58 @@ Last Updated: May 23, 2026
 - pfsense-webui-login.png
 - pfsense-dashboard.png
 - pfsense-dhcp-config.png
+---
+
+## Experiment 002 — SSH Hardening
+
+**Date:** 2026-05-23
+**Status:** ✅ Complete
+
+### Objective
+Harden the SSH configuration on Ubuntu-Server-01 to reduce attack surface and eliminate password-based authentication.
+
+### What I Did
+
+#### 1. Modified /etc/ssh/sshd_config
+Changed the following settings:
+
+| Setting | Before | After | Reason |
+|---|---|---|---|
+| Port | 22 | 2222 | Avoid automated bot scans on default port |
+| PermitRootLogin | prohibit-password | no | Prevent any root SSH access |
+| MaxAuthTries | 6 | 3 | Limit brute force attempts |
+| LoginGraceTime | 2m | 30s | Reduce attack window |
+| X11Forwarding | yes | no | Server has no GUI, unnecessary exposure |
+| PasswordAuthentication | yes | no | Keys only, no password login |
+
+#### 2. Updated UFW Firewall Rules
+- Opened port 2222/tcp
+- Removed OpenSSH rule (port 22)
+- Result: Only port 2222 accepts SSH connections
+
+#### 3. Generated SSH Key Pair on Windows
+- Algorithm: ed25519 (modern, most secure)
+- Private key stays on Windows PC only
+- Public key copied to server's ~/.ssh/authorized_keys
+
+#### 4. Disabled Password Authentication
+- Set PasswordAuthentication no in sshd_config
+- Set KbdInteractiveAuthentication no
+- Set UsePAM no
+- Discovered /etc/ssh/sshd_config.d/50-cloud-init.conf was overriding settings
+- Fixed override by updating 50-cloud-init.conf directly
+
+### Verification
+- Ran `sudo sshd -T | grep -E "port|permitrootlogin|maxauthtries|logingraceTime|x11forwarding"` to confirm settings loaded
+- Tested password login with `-o PreferredAuthentications=password` — returned `Permission denied (publickey)` ✅
+- Confirmed key-based login works with passphrase ✅
+
+### Screenshots
+- `images/ssh-hardening-verified.png` — hardening settings confirmed live
+- `images/ssh-password-disabled.png` — password authentication rejected
+
+### Key Lessons
+- Ubuntu 24.04 includes /etc/ssh/sshd_config.d/ which can override main config
+- UsePAM yes can bypass PasswordAuthentication no — both must be set
+- Always verify changes with `sudo sshd -t` before restarting to catch config errors
+- Never close your active session before confirming key auth works
