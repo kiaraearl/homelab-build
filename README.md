@@ -18,7 +18,7 @@ reproducible, and portfolio-ready.
 
 ## Lab Goals
 
-- [ ] Practice OS installation, configuration, and troubleshooting
+- [x] Practice OS installation, configuration, and troubleshooting
 - [ ] Simulate enterprise networking (VLANs, DHCP, DNS, firewalls)
 - [ ] Run vulnerability assessments in a safe, isolated environment
 - [ ] Build a functional SOC-like detection and monitoring setup
@@ -92,11 +92,11 @@ reproducible, and portfolio-ready.
 | OS | Ubuntu Server 22.04 LTS |
 
 **Progress:**
-- [ ] OS installed
-- [ ] SSH configured
-- [ ] Static IP assigned
-- [ ] User accounts created
-- [ ] Basic firewall (UFW) configured
+- [x] OS installed
+- [x] SSH configured
+- [x] Static IP assigned
+- [x] User accounts created
+- [x] Basic firewall (UFW) configured
 
 ---
 
