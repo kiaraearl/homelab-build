@@ -89,7 +89,7 @@ reproducible, and portfolio-ready.
 | RAM | 2GB |
 | Storage | 20GB dynamically allocated |
 | Network | Internal Network (VirtualBox) |
-| OS | Ubuntu Server 22.04 LTS |
+| OS | Ubuntu Server 24.04 LTS |
 
 **Progress:**
 - [x] OS installed
