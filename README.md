@@ -48,7 +48,7 @@ reproducible, and portfolio-ready.
 |---|---|---|
 | **VirtualBox** | Primary hypervisor for all VMs | ✅ Complete |
 | **pfSense** | Firewall / router VM — network segmentation | ✅ Complete |
-| **Ubuntu Server** | Linux practice environment | 🔄 Planned |
+| **Ubuntu Server** | Linux practice environment | ✅ Complete |
 | **Windows Server** | Active Directory and Group Policy practice | ⏳ Future |
 | **Kali Linux** | Offensive security tooling practice | ⏳ Future |
 
@@ -72,7 +72,7 @@ reproducible, and portfolio-ready.
 ```
 
 ### Planned Network Config
-- **LAN Segment:** `192.168.10.0/24` — primary lab network
+- **LAN Segment:** `192.168.56.0/24` — primary lab network
 - **DHCP:** Managed by pfSense VM
 - **DNS:** pfSense with upstream forwarding
 - **VLAN Segmentation:** Isolate attack VM from rest of lab
@@ -137,7 +137,7 @@ reproducible, and portfolio-ready.
 | # | Experiment | Status |
 |---|---|---|
 | 001 | pfSense firewall rule configuration | ✅ Complete |
-| 002 | Ubuntu SSH hardening (key auth, fail2ban) | ✅ Complete |
+| 002 | Ubuntu SSH hardening (key auth, port change, disable root) | ✅ Complete |
 | 003 | Nessus scan against Ubuntu VM | ⏳ Planned |
 | 004 | VLAN segmentation in VirtualBox | ⏳ Planned |
 | 005 | Simulate and detect a port scan (Nmap) | ⏳ Future |
