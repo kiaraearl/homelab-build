@@ -46,8 +46,8 @@ reproducible, and portfolio-ready.
 
 | Tool | Purpose | Status |
 |---|---|---|
-| **VirtualBox** | Primary hypervisor for all VMs | 🔄 Installing |
-| **pfSense** | Firewall / router VM — network segmentation | 🔄 Planned |
+| **VirtualBox** | Primary hypervisor for all VMs | 🔄 Installed |
+| **pfSense** | Firewall / router VM — network segmentation | 🔄 Installing |
 | **Ubuntu Server** | Linux practice environment | 🔄 Planned |
 | **Windows Server** | Active Directory and Group Policy practice | ⏳ Future |
 | **Kali Linux** | Offensive security tooling practice | ⏳ Future |
@@ -111,12 +111,12 @@ reproducible, and portfolio-ready.
 | OS | pfSense CE |
 
 **Progress:**
-- [ ] ISO downloaded and verified
-- [ ] VM created in VirtualBox
-- [ ] pfSense installed
-- [ ] WAN/LAN interfaces configured
-- [ ] DHCP server enabled on LAN
-- [ ] Web UI accessible from host
+- [x] ISO downloaded and verified
+- [x] VM created in VirtualBox
+- [x] pfSense installed
+- [x] WAN/LAN interfaces configured
+- [x] DHCP server enabled on LAN
+- [x] Web UI accessible from host
 
 ---
 
