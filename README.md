@@ -19,7 +19,7 @@ reproducible, and portfolio-ready.
 ## Lab Goals
 
 - [x] Practice OS installation, configuration, and troubleshooting
-- [ ] Simulate enterprise networking (VLANs, DHCP, DNS, firewalls)
+- [x] Simulate enterprise networking (VLANs, DHCP, DNS, firewalls)
 - [ ] Run vulnerability assessments in a safe, isolated environment
 - [ ] Build a functional SOC-like detection and monitoring setup
 - [ ] Support Network+ and Security+ hands-on study
@@ -46,8 +46,8 @@ reproducible, and portfolio-ready.
 
 | Tool | Purpose | Status |
 |---|---|---|
-| **VirtualBox** | Primary hypervisor for all VMs | 🔄 Installed |
-| **pfSense** | Firewall / router VM — network segmentation | 🔄 Installing |
+| **VirtualBox** | Primary hypervisor for all VMs | ✅ Complete |
+| **pfSense** | Firewall / router VM — network segmentation | ✅ Complete |
 | **Ubuntu Server** | Linux practice environment | 🔄 Planned |
 | **Windows Server** | Active Directory and Group Policy practice | ⏳ Future |
 | **Kali Linux** | Offensive security tooling practice | ⏳ Future |
@@ -136,8 +136,8 @@ reproducible, and portfolio-ready.
 
 | # | Experiment | Status |
 |---|---|---|
-| 001 | pfSense firewall rule configuration | 🔄 Planned |
-| 002 | Ubuntu SSH hardening (key auth, fail2ban) | 🔄 Planned |
+| 001 | pfSense firewall rule configuration | ✅ Complete |
+| 002 | Ubuntu SSH hardening (key auth, fail2ban) | ✅ Complete |
 | 003 | Nessus scan against Ubuntu VM | ⏳ Planned |
 | 004 | VLAN segmentation in VirtualBox | ⏳ Planned |
 | 005 | Simulate and detect a port scan (Nmap) | ⏳ Future |
