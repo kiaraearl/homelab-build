@@ -138,6 +138,11 @@ reproducible, and portfolio-ready.
 | 005 | Nessus — unauthenticated + credentialed vulnerability scan | ✅ Complete | [View](experiments/exp005-nessus-vulnerability-scan.md) |
 | 006 | Active Directory lab — Windows Server VM | ⏳ Planned | — |
 
+## Incident Reports
+
+| ID | Title | Format |
+|---|---|---|
+| IR-2026-001 | SSH Brute Force Attack — Ubuntu-Server-01 | [PDF](incident-reports/IR-2026-001-SSH-BruteForce.pdf) |
 ---
 
 ## Defense Layers Built
