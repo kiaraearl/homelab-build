@@ -137,33 +137,41 @@ Replace default allow-all firewall rules on pfSense with a minimal, explicit rul
 - [x] Phase 2 — Ubuntu Server VM
 - [x] Phase 3 — pfSense Firewall VM
 - [ ] Phase 4 — Experiments
-- [ ] Phase 5 — GitHub Documentation
+- [x] Phase 5 — GitHub Documentation
 
 ---
 
 ## Next Steps
-- Start Experiment 001 — pfSense firewall rules
-- Start Experiment 002 — SSH hardening
+- Exp004 — Nessus vulnerability scan
 - Update homelab-build GitHub README checkboxes
-- Push lab-notes.md to GitHub
 
 ---
 
 ## Screenshots Taken
-- ubuntu-install-progress.png
-- ubuntu-first-login.png
-- ubuntu-ip-address.png
-- ubuntu-updates-complete.png
-- ubuntu-static-ip-confirmed.png
-- ubuntu-ssh-connected.png
-- ubuntu-ufw-status.png
-- pfsense-install-welcome.png
-- pfsense-interfaces.png
-- pfsense-lan-config.png
-- pfsense-install-complete.png
-- pfsense-webui-login.png
-- pfsense-dashboard.png
-- pfsense-dhcp-config.png
+
+### Setup
+- setup-01-ubuntu-install-progress.png
+- setup-02-ubuntu-first-login.png
+- setup-03-ubuntu-ip-address.png
+- setup-04-ubuntu-updates-complete.png
+- setup-05-ubuntu-netplan-config.png
+- setup-06-ubuntu-static-ip-confirmed.png
+- setup-07-ubuntu-ssh-connected.png
+- setup-08-ubuntu-ufw-status.png
+
+### Exp001
+- exp001-01-pfsense-firewall-rules.png
+
+### Exp002
+- exp002-01-ssh-hardening-verified.png
+- exp002-02-ssh-password-disabled.png
+
+### Exp003
+- exp003-01-jail-active.png
+- exp003-02-ban-fired.png
+- exp003-03-config-verified.png
+- exp003-04-clean-ban.png
+
 ---
 
 ## Experiment 002 — SSH Hardening
