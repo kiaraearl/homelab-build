@@ -219,3 +219,171 @@ Changed the following settings:
 - UsePAM yes can bypass PasswordAuthentication no — both must be set
 - Always verify changes with `sudo sshd -t` before restarting to catch config errors
 - Never close your active session before confirming key auth works
+---
+
+## Exp003 — fail2ban SSH Intrusion Prevention
+
+**Date:** 2026-05-24
+**System:** Ubuntu-Server-01 (192.168.56.10)
+**Objective:** Deploy fail2ban to automatically detect and block SSH brute force attempts
+
+---
+
+### What is fail2ban
+
+fail2ban is an intrusion prevention system that watches log files in real time.
+When it detects repeated failed login attempts from the same IP, it automatically
+blocks that IP using the system firewall (UFW in this case).
+
+- **UFW** = static bouncer — blocks IPs you define ahead of time
+- **fail2ban** = dynamic bouncer — watches live activity and bans automatically
+
+---
+
+### Installation
+
+```bash
+sudo apt update && sudo apt install fail2ban -y
+```
+
+Installed packages:
+- `fail2ban` — main tool
+- `python3-pyinotify` — watches log files in real time for changes
+- `python3-pyasyncore` — handles async I/O for log event processing
+- `whois` — IP lookup support
+
+---
+
+### Configuration
+
+Created local override file (never edit jail.conf directly — it gets
+overwritten on updates):
+
+```bash
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+sudo nano /etc/fail2ban/jail.local
+```
+
+Added custom sshd jail:
+
+```ini
+[sshd]
+enabled = true
+port = 2222
+logpath = /var/log/auth.log
+maxretry = 3
+bantime = 600
+findtime = 300
+```
+
+| Setting | Value | Meaning |
+|---|---|---|
+| port | 2222 | Custom SSH port from Exp002 |
+| logpath | /var/log/auth.log | Ubuntu auth log fail2ban watches |
+| maxretry | 3 | 3 failures triggers a ban |
+| bantime | 600 | Ban lasts 10 minutes |
+| findtime | 300 | Failures must occur within 5 minutes |
+
+---
+
+### Troubleshooting — Duplicate [sshd] Section
+
+**Problem:** jail.conf contained a second [sshd] block further down the file.
+When copied to jail.local, fail2ban threw an error on restart:
+
+```
+ERROR: While reading from '/etc/fail2ban/jail.local' [line 281]:
+section 'sshd' already exists
+```
+
+This caused fail2ban to crash and the socket to go offline.
+
+**Diagnosis:**
+```bash
+sudo fail2ban-server --test
+```
+
+**Fix:** Located and deleted the duplicate [sshd] block from jail.local,
+keeping only the custom block added at the top of the JAILS section.
+
+**Lesson:** Always run `sudo fail2ban-server --test` before restarting
+fail2ban after config changes. Silent config errors will crash the service.
+
+---
+
+### Verification
+
+Started and enabled fail2ban:
+```bash
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
+sudo systemctl status fail2ban
+```
+
+Confirmed jail loaded with correct settings:
+```bash
+sudo fail2ban-client status sshd
+sudo tail -n 20 /var/log/fail2ban.log
+```
+
+Log confirmed:
+```
+maxRetry: 3
+findtime: 300
+banTime: 600
+Added logfile: '/var/log/auth.log'
+Jail 'sshd' started
+```
+
+---
+
+### Live Ban Test
+
+Triggered ban from Windows host (192.168.56.1) using forced password auth:
+```powershell
+ssh -p 2222 -o PreferredAuthentications=password -o PubkeyAuthentication=no fakeuser@192.168.56.10
+```
+
+Result from fail2ban.log:
+```
+00:55:32 - Found 192.168.56.1  (attempt 1)
+00:55:33 - Found 192.168.56.1  (attempt 2)
+00:55:35 - Found 192.168.56.1  (attempt 3)
+00:55:36 - NOTICE [sshd] Ban 192.168.56.1
+```
+
+Ban fired on exactly the 3rd attempt within 4 seconds. ✓
+
+**Note:** The ban kicked the active SSH session — all connections from a
+banned IP are dropped immediately including existing sessions. Recovery
+required direct console access to unban and reconnect.
+
+Unbanned:
+```bash
+sudo fail2ban-client set sshd unbanip 192.168.56.1
+```
+
+Final status confirmed:
+- Currently banned: 0
+- Total banned: 1 (recorded in persistent SQLite database)
+
+---
+
+### Defense Layers After Exp003
+
+| Layer | Tool | What it does |
+|---|---|---|
+| 1 | SSH hardening (Exp002) | Port 2222, key auth only, no root, no passwords |
+| 2 | UFW (Exp001) | Static firewall — only port 2222 open |
+| 3 | fail2ban (Exp003) | Dynamic blocking — bans IPs after 3 failed attempts |
+
+---
+
+### Key Takeaways
+
+- fail2ban adds dynamic threat response on top of static firewall rules
+- UFW sets the baseline, fail2ban responds to live behavior
+- Always use jail.local not jail.conf for custom config
+- Always test config with `fail2ban-server --test` before restarting
+- A banned IP loses all access immediately including active sessions
+- Persistent SQLite database survives restarts and tracks ban history
