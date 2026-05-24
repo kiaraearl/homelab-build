@@ -1,7 +1,7 @@
 # Home Lab — Notes & Config
 
 ## Lab Status
-Last Updated: May 23, 2026
+Last Updated: May 24, 2026
 
 ## Host Machine
 - OS: Windows 11 Pro
@@ -41,7 +41,7 @@ Last Updated: May 23, 2026
 - Password: [see Bitwarden]
 
 ### SSH Access
-- From PowerShell: ssh kearl@192.168.56.10
+- From PowerShell: ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 
 ### Netplan Config
 - File: /etc/netplan/50-cloud-init.yaml
@@ -56,6 +56,56 @@ Last Updated: May 23, 2026
 - [x] UFW firewall enabled
 - [x] OpenSSH allowed through UFW
 - [x] All updates applied (apt update && apt upgrade)
+---
+## VM 002 — pfSense Firewall
+
+### Specs
+- Name: pfSense-Firewall
+- OS: pfSense CE 2.8.1-RELEASE (FreeBSD/amd64)
+- RAM: 1GB
+- Storage: 10GB VDI
+- Adapter 1 (em0): NAT — WAN — 10.0.2.15 (DHCP)
+- Adapter 2 (em1): Host-Only — LAN — 192.168.56.2 (static)
+
+### Credentials
+- Web UI: http://192.168.56.2
+- Username: admin
+- Password: [see Bitwarden]
+
+### DHCP Server
+- Enabled on LAN
+- Range: 192.168.56.100 - 192.168.56.200
+
+### Status
+- [x] ISO downloaded and verified
+- [x] VM created in VirtualBox
+- [x] pfSense CE 2.8.1 installed
+- [x] WAN/LAN interfaces configured
+- [x] LAN IP set to 192.168.56.2
+- [x] DHCP server enabled on LAN
+- [x] Web UI accessible from host browser
+- [x] Default password changed
+---
+
+## ISOs
+- ubuntu-24.04.4-live-server-amd64.iso
+- netgate-installer-v1.2-RELEASE-amd64.iso
+
+---
+
+## Phase Progress
+- [x] Phase 1 — VirtualBox Setup
+- [x] Phase 2 — Ubuntu Server VM
+- [x] Phase 3 — pfSense Firewall VM
+- [x] Phase 4 — Experiments
+- [x] Phase 5 — GitHub Documentation
+
+---
+
+## Next Steps
+- Exp004 — Nessus vulnerability scan
+- Update homelab-build GitHub README checkboxes
+
 ---
 
 ## Experiment 001 — pfSense Firewall Rules
@@ -92,85 +142,7 @@ Replace default allow-all firewall rules on pfSense with a minimal, explicit rul
 - SSH to Ubuntu on port 2222 still works through firewall ✅
 
 ### Screenshots
-- `images/pfsense-firewall-rules-final.png` — final ruleset with default rules disabled
----
-
-## VM 002 — pfSense Firewall
-
-### Specs
-- Name: pfSense-Firewall
-- OS: pfSense CE 2.8.1-RELEASE (FreeBSD/amd64)
-- RAM: 1GB
-- Storage: 10GB VDI
-- Adapter 1 (em0): NAT — WAN — 10.0.2.15 (DHCP)
-- Adapter 2 (em1): Host-Only — LAN — 192.168.56.2 (static)
-
-### Credentials
-- Web UI: http://192.168.56.2
-- Username: admin
-- Password: [see Bitwarden]
-
-### DHCP Server
-- Enabled on LAN
-- Range: 192.168.56.100 - 192.168.56.200
-
-### Status
-- [x] ISO downloaded and verified
-- [x] VM created in VirtualBox
-- [x] pfSense CE 2.8.1 installed
-- [x] WAN/LAN interfaces configured
-- [x] LAN IP set to 192.168.56.2
-- [x] DHCP server enabled on LAN
-- [x] Web UI accessible from host browser
-- [x] Default password changed
-
----
-
-## ISOs
-- ubuntu-24.04.4-live-server-amd64.iso
-- netgate-installer-v1.2-RELEASE-amd64.iso
-
----
-
-## Phase Progress
-- [x] Phase 1 — VirtualBox Setup
-- [x] Phase 2 — Ubuntu Server VM
-- [x] Phase 3 — pfSense Firewall VM
-- [ ] Phase 4 — Experiments
-- [x] Phase 5 — GitHub Documentation
-
----
-
-## Next Steps
-- Exp004 — Nessus vulnerability scan
-- Update homelab-build GitHub README checkboxes
-
----
-
-## Screenshots Taken
-
-### Setup
-- setup-01-ubuntu-install-progress.png
-- setup-02-ubuntu-first-login.png
-- setup-03-ubuntu-ip-address.png
-- setup-04-ubuntu-updates-complete.png
-- setup-05-ubuntu-netplan-config.png
-- setup-06-ubuntu-static-ip-confirmed.png
-- setup-07-ubuntu-ssh-connected.png
-- setup-08-ubuntu-ufw-status.png
-
-### Exp001
-- exp001-01-pfsense-firewall-rules.png
-
-### Exp002
-- exp002-01-ssh-hardening-verified.png
-- exp002-02-ssh-password-disabled.png
-
-### Exp003
-- exp003-01-jail-active.png
-- exp003-02-ban-fired.png
-- exp003-03-config-verified.png
-- exp003-04-clean-ban.png
+- `images/exp001-01-pfsense-firewall-rules.png` — final ruleset with default rules disabled
 
 ---
 
@@ -219,8 +191,8 @@ Changed the following settings:
 - Confirmed key-based login works with passphrase ✅
 
 ### Screenshots
-- `images/ssh-hardening-verified.png` — hardening settings confirmed live
-- `images/ssh-password-disabled.png` — password authentication rejected
+- `images/exp002-01-ssh-hardening-verified.png` — hardening settings confirmed live
+- `images/exp002-02-ssh-password-disabled.png` — password authentication rejected
 
 ### Key Lessons
 - Ubuntu 24.04 includes /etc/ssh/sshd_config.d/ which can override main config
@@ -229,7 +201,7 @@ Changed the following settings:
 - Never close your active session before confirming key auth works
 ---
 
-## Exp003 — fail2ban SSH Intrusion Prevention
+## Experiment 003 — fail2ban SSH Intrusion Prevention
 
 **Date:** 2026-05-24
 **System:** Ubuntu-Server-01 (192.168.56.10)
@@ -395,3 +367,30 @@ Final status confirmed:
 - Always test config with `fail2ban-server --test` before restarting
 - A banned IP loses all access immediately including active sessions
 - Persistent SQLite database survives restarts and tracks ban history
+
+---
+
+## Screenshots Taken
+
+### Setup
+- setup-01-ubuntu-install-progress.png
+- setup-02-ubuntu-first-login.png
+- setup-03-ubuntu-ip-address.png
+- setup-04-ubuntu-updates-complete.png
+- setup-05-ubuntu-netplan-config.png
+- setup-06-ubuntu-static-ip-confirmed.png
+- setup-07-ubuntu-ssh-connected.png
+- setup-08-ubuntu-ufw-status.png
+
+### Exp001
+- exp001-01-pfsense-firewall-rules.png
+
+### Exp002
+- exp002-01-ssh-hardening-verified.png
+- exp002-02-ssh-password-disabled.png
+
+### Exp003
+- exp003-01-jail-active.png
+- exp003-02-ban-fired.png
+- exp003-03-config-verified.png
+- exp003-04-clean-ban.png
