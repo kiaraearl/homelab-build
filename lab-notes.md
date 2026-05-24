@@ -54,7 +54,7 @@ Last Updated: May 24, 2026
 - [x] Static IP assigned (192.168.56.10)
 - [x] User accounts created
 - [x] UFW firewall enabled
-- [x] OpenSSH allowed through UFW
+- [x] SSH hardened — port 2222, key auth only (see Experiment 002)
 - [x] All updates applied (apt update && apt upgrade)
 ---
 ## VM 002 — pfSense Firewall
