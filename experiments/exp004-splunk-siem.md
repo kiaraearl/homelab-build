@@ -173,3 +173,10 @@ index=main sourcetype=linux_secure "Failed password" | timechart count by host
 |---|---|---|
 | Security+ | Operations & Incident Response | SIEM, log management, monitoring |
 | CySA+ | Security Operations | Threat detection, security monitoring, alerting |
+
+## Related Experiments
+
+- [Exp001 — pfSense Firewall Rules](exp001-pfsense-firewall-rules.md)
+- [Exp002 — SSH Hardening](exp002-ssh-hardening.md)
+- [Exp003 — fail2ban](exp003-fail2ban.md)
+- [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)

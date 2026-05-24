@@ -156,3 +156,10 @@ Final status:
 |---|---|---|
 | Security+ | Threats, Attacks & Vulnerabilities | Intrusion prevention, log monitoring |
 | CySA+ | Security Operations | Threat detection, automated defensive response |
+
+## Related Experiments
+
+- [Exp001 — pfSense Firewall Rules](exp001-pfsense-firewall-rules.md)
+- [Exp002 — SSH Hardening](exp002-ssh-hardening.md)
+- [Exp004 — Splunk SIEM](exp004-splunk-siem.md)
+- [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)

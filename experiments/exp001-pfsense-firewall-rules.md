@@ -73,3 +73,10 @@ Firewalls are the first line of defense in any network. The default pfSense rule
 |---|---|---|
 | Network+ | Network Security | Firewall configuration, rule ordering |
 | Security+ | Architecture & Design | Least privilege, default deny, defense in depth |
+
+## Related Experiments
+
+- [Exp002 — SSH Hardening](exp002-ssh-hardening.md)
+- [Exp003 — fail2ban](exp003-fail2ban.md)
+- [Exp004 — Splunk SIEM](exp004-splunk-siem.md)
+- [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)

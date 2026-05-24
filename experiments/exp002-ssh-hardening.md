@@ -88,3 +88,10 @@ sudo sshd -T | grep -E "port|permitrootlogin|maxauthtries|logingracetime|x11forw
 |---|---|---|
 | Security+ | Implementation | SSH hardening, authentication controls |
 | CySA+ | Security Operations | System hardening, credential management |
+
+## Related Experiments
+
+- [Exp001 — pfSense Firewall Rules](exp001-pfsense-firewall-rules.md)
+- [Exp003 — fail2ban](exp003-fail2ban.md)
+- [Exp004 — Splunk SIEM](exp004-splunk-siem.md)
+- [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)
