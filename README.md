@@ -1,9 +1,9 @@
 # Home Lab Build — Documentation 🖥️
 
 > Ongoing documentation of my personal cybersecurity home lab —
-> hardware specs, VM setup, network configuration, and security tooling.
+> hardware specs, VM setup, network configuration, and security experiments.
 >
-> Authored by Kiara Earl — CompTIA A+ Certified | WGU Cybersecurity Student
+> **Kiara Earl** — CompTIA A+ Certified | WGU B.S. Cybersecurity Student
 
 ---
 
@@ -19,10 +19,10 @@ reproducible, and portfolio-ready.
 ## Lab Goals
 
 - [x] Practice OS installation, configuration, and troubleshooting
-- [x] Simulate enterprise networking (VLANs, DHCP, DNS, firewalls)
-- [ ] Run vulnerability assessments in a safe, isolated environment
-- [ ] Build a functional SOC-like detection and monitoring setup
-- [ ] Support Network+ and Security+ hands-on study
+- [x] Simulate enterprise networking (firewall rules, DHCP, DNS)
+- [x] Run vulnerability assessments in a safe, isolated environment
+- [x] Build a functional SOC-like detection and monitoring setup
+- [x] Support Network+ and Security+ hands-on study
 
 ---
 
@@ -47,8 +47,8 @@ reproducible, and portfolio-ready.
 | Tool | Purpose | Status |
 |---|---|---|
 | **VirtualBox** | Primary hypervisor for all VMs | ✅ Complete |
-| **pfSense** | Firewall / router VM — network segmentation | ✅ Complete |
-| **Ubuntu Server** | Linux practice environment | ✅ Complete |
+| **pfSense CE** | Firewall / router VM — network segmentation | ✅ Complete |
+| **Ubuntu Server 24.04** | Linux practice environment | ✅ Complete |
 | **Windows Server** | Active Directory and Group Policy practice | ⏳ Future |
 | **Kali Linux** | Offensive security tooling practice | ⏳ Future |
 
@@ -57,100 +57,98 @@ reproducible, and portfolio-ready.
 ## Network Design
 
 ```
-[ISP Modem]
-     |
-[Home Router]
-     |
-[VirtualBox Host — Windows 11 Pro]
-     |
-  [pfSense VM] ← firewall / segmentation
-     |
-  ┌──────────────┐
-  │              │
-[Ubuntu VM]  [Windows Server VM]
-(Linux lab)  (AD / GPO practice)
+[VirtualBox Host — Windows 11 Pro — 192.168.56.1]
+         |
+    [pfSense VM]  ←  firewall / LAN: 192.168.56.2
+         |
+    [Ubuntu Server VM]  ←  192.168.56.10
 ```
 
-### Planned Network Config
-- **LAN Segment:** `192.168.56.0/24` — primary lab network
-- **DHCP:** Managed by pfSense VM
-- **DNS:** pfSense with upstream forwarding
-- **VLAN Segmentation:** Isolate attack VM from rest of lab
+### Network Config
+- **Host-Only Network:** `192.168.56.0/24`
+- **DHCP Pool:** `192.168.56.100 - 192.168.56.200` (managed by pfSense)
+- **Ubuntu SSH:** Port 2222, key-based auth only
 
 ---
 
 ## VM Build Log
 
 ### VM 001 — Ubuntu Server
-**Purpose:** Linux CLI practice, hosting practice, scripting
+**Purpose:** Linux CLI practice, security tooling, log generation
 
 | Setting | Value |
 |---|---|
+| OS | Ubuntu Server 24.04.4 LTS |
 | RAM | 2GB |
 | Storage | 20GB dynamically allocated |
-| Network | Internal Network (VirtualBox) |
-| OS | Ubuntu Server 24.04 LTS |
+| IP | 192.168.56.10 (static) |
+| SSH | Port 2222, ed25519 key auth |
 
 **Progress:**
 - [x] OS installed
-- [x] SSH configured
+- [x] SSH configured and hardened (port 2222, key auth only)
 - [x] Static IP assigned
-- [x] User accounts created
-- [x] Basic firewall (UFW) configured
+- [x] UFW firewall enabled
+- [x] fail2ban installed and active
+- [x] Splunk Universal Forwarder installed
+- [x] Nessus credentialed scan validated
 
 ---
 
 ### VM 002 — pfSense Firewall
-**Purpose:** Network segmentation, firewall rules, DHCP/DNS management
+**Purpose:** Network segmentation, firewall rules, DHCP management
 
 | Setting | Value |
 |---|---|
+| OS | pfSense CE 2.8.1 |
 | RAM | 1GB |
 | Storage | 10GB |
-| Network Adapters | WAN (NAT) + LAN (Internal Network) |
-| OS | pfSense CE |
+| LAN IP | 192.168.56.2 (static) |
 
 **Progress:**
-- [x] ISO downloaded and verified
-- [x] VM created in VirtualBox
-- [x] pfSense installed
+- [x] OS installed
 - [x] WAN/LAN interfaces configured
 - [x] DHCP server enabled on LAN
 - [x] Web UI accessible from host
+- [x] Default deny firewall ruleset configured
 
 ---
 
-## Security Tooling (Planned)
+## Security Tooling
 
 | Tool | Purpose | Status |
 |---|---|---|
-| **Nessus Essentials** | Vulnerability scanning (free tier) | ⏳ Planned |
-| **OpenVAS** | Open source vulnerability assessment | ⏳ Planned |
-| **Wireshark** | Network traffic analysis | ⏳ Planned |
+| **pfSense** | Firewall — default deny ruleset | ✅ Complete |
+| **fail2ban** | SSH brute force prevention | ✅ Complete |
+| **Splunk Enterprise** | SIEM — log ingestion, dashboards, alerts | ✅ Complete |
+| **Nessus Essentials Plus** | Vulnerability scanning | ✅ Complete |
+| **Wireshark** | Network traffic analysis | ⏳ Future |
 | **Snort / Suricata** | IDS/IPS practice | ⏳ Future |
-| **Splunk Free** | Log aggregation and SIEM practice | ⏳ Future |
 
 ---
 
 ## Experiments & Write-Ups
 
-| # | Experiment | Status |
-|---|---|---|
-| 001 | pfSense firewall rule configuration | ✅ Complete |
-| 002 | Ubuntu SSH hardening (key auth, port change, disable root) | ✅ Complete |
-| 003 | Nessus scan against Ubuntu VM | ⏳ Planned |
-| 004 | VLAN segmentation in VirtualBox | ⏳ Planned |
-| 005 | Simulate and detect a port scan (Nmap) | ⏳ Future |
+| # | Experiment | Status | Write-Up |
+|---|---|---|---|
+| 001 | pfSense firewall rule configuration — default deny ruleset | ✅ Complete | [View](experiments/exp001-pfsense-firewall-rules.md) |
+| 002 | SSH hardening — port 2222, key auth, disable root & passwords | ✅ Complete | [View](experiments/exp002-ssh-hardening.md) |
+| 003 | fail2ban — SSH intrusion prevention, live ban test | ✅ Complete | [View](experiments/exp003-fail2ban.md) |
+| 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | ✅ Complete | [View](experiments/exp004-splunk-siem.md) |
+| 005 | Nessus — unauthenticated + credentialed vulnerability scan | ✅ Complete | [View](experiments/exp005-nessus-vulnerability-scan.md) |
+| 006 | Active Directory lab — Windows Server VM | ⏳ Planned | — |
 
 ---
 
-## Resources I'm Using
+## Defense Layers Built
 
-- Professor Messer's Network+ Course (Free)
-- TryHackMe — SOC Level 1 Path
-- Cisco Packet Tracer (SOHO network simulation)
-- VirtualBox Documentation
-- pfSense Official Docs
+| Layer | Tool | What It Does |
+|---|---|---|
+| 1 | pfSense Firewall | Default deny — only port 2222 allowed inbound |
+| 2 | SSH Hardening | Port 2222, key auth only, no root, no passwords |
+| 3 | fail2ban | Dynamic blocking — bans IPs after 3 failed attempts |
+| 4 | Splunk SIEM | Real-time log ingestion, dashboards, and alerts |
+| 5 | Nessus | Vulnerability scanning — validates attack surface |
 
 ---
 
@@ -162,8 +160,33 @@ reproducible, and portfolio-ready.
 | OS installation & config | A+ Core 2 |
 | VM networking & subnetting | Network+ |
 | Firewall rules & segmentation | Network+ / Security+ |
-| Vulnerability scanning | Security+ / CySA+ |
-| Log review & SIEM | CySA+ |
+| SSH hardening | Security+ |
+| Intrusion prevention (fail2ban) | Security+ / CySA+ |
+| SIEM log ingestion & alerting | Security+ / CySA+ |
+| Vulnerability scanning (Nessus) | Security+ / CySA+ |
+
+---
+
+## Repository Structure
+
+```
+homelab-build/
+├── README.md
+├── lab-notes.md              ← VM specs, network config, credentials reference
+├── experiments/
+│   ├── exp001-pfsense-firewall-rules.md
+│   ├── exp002-ssh-hardening.md
+│   ├── exp003-fail2ban.md
+│   ├── exp004-splunk-siem.md
+│   ├── exp005-nessus-vulnerability-scan.md
+│   └── images/
+│       ├── setup/
+│       ├── exp001/
+│       ├── exp002/
+│       ├── exp003/
+│       ├── exp004/
+│       └── exp005/
+```
 
 ---
 
@@ -173,7 +196,7 @@ reproducible, and portfolio-ready.
 CompTIA A+ Certified | WGU B.S. Cybersecurity & Information Assurance (Expected 2027)
 📧 kimearls24@outlook.com
 📍 Houston, TX
-🔗 [Portfolio](https://kiaraearl.github.io)
+🔗 [Portfolio](https://kiaraearl.github.io) | [GitHub](https://github.com/kiaraearl)
 
 ---
 
