@@ -180,3 +180,4 @@ index=main sourcetype=linux_secure "Failed password" | timechart count by host
 - [Exp002 — SSH Hardening](exp002-ssh-hardening.md)
 - [Exp003 — fail2ban](exp003-fail2ban.md)
 - [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)
+- [Exp006 — Active Directory](exp006-active-directory.md)

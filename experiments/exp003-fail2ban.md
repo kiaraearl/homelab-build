@@ -163,3 +163,4 @@ Final status:
 - [Exp002 — SSH Hardening](exp002-ssh-hardening.md)
 - [Exp004 — Splunk SIEM](exp004-splunk-siem.md)
 - [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)
+- [Exp006 — Active Directory](exp006-active-directory.md)

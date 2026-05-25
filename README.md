@@ -49,7 +49,7 @@ reproducible, and portfolio-ready.
 | **VirtualBox** | Primary hypervisor for all VMs | ✅ Complete |
 | **pfSense CE** | Firewall / router VM — network segmentation | ✅ Complete |
 | **Ubuntu Server 24.04** | Linux practice environment | ✅ Complete |
-| **Windows Server** | Active Directory and Group Policy practice | ⏳ Future |
+| **Windows Server 2022** | Active Directory Domain Controller — lab.local | ✅ Complete |
 | **Kali Linux** | Offensive security tooling practice | ⏳ Future |
 
 ---
@@ -62,6 +62,8 @@ reproducible, and portfolio-ready.
     [pfSense VM]  ←  firewall / LAN: 192.168.56.2
          |
     [Ubuntu Server VM]  ←  192.168.56.10
+         |
+    [WinServer2022-DC01]  ←  192.168.56.20 (Domain Controller — lab.local)
 ```
 
 ### Network Config
@@ -95,6 +97,30 @@ reproducible, and portfolio-ready.
 
 ---
 
+### VM 003 — Windows Server 2022 Domain Controller
+**Purpose:** Active Directory, identity management, Windows event log generation
+
+| Setting | Value |
+|---|---|
+| OS | Windows Server 2022 Standard Evaluation |
+| RAM | 4GB |
+| Storage | 50GB dynamically allocated |
+| IP | 192.168.56.20 (static) |
+| Domain | lab.local |
+| Hostname | DC01 |
+
+**Progress:**
+- [x] OS installed
+- [x] Static IP assigned (192.168.56.20)
+- [x] Renamed to DC01
+- [x] AD DS role installed and configured
+- [x] Promoted to Domain Controller (lab.local)
+- [x] OUs created (SOC_Team, IT_Admin, Workstations)
+- [x] Domain users created (kearl, jdoe, jsmith)
+- [x] Splunk Universal Forwarder shipping Security logs to SIEM
+
+---
+
 ### VM 002 — pfSense Firewall
 **Purpose:** Network segmentation, firewall rules, DHCP management
 
@@ -122,6 +148,7 @@ reproducible, and portfolio-ready.
 | **fail2ban** | SSH brute force prevention | ✅ Complete |
 | **Splunk Enterprise** | SIEM — log ingestion, dashboards, alerts | ✅ Complete |
 | **Nessus Essentials Plus** | Vulnerability scanning | ✅ Complete |
+| **Active Directory** | Identity & access management, Windows event monitoring | ✅ Complete |
 | **Wireshark** | Network traffic analysis | ⏳ Future |
 | **Snort / Suricata** | IDS/IPS practice | ⏳ Future |
 
@@ -136,7 +163,7 @@ reproducible, and portfolio-ready.
 | 003 | fail2ban — SSH intrusion prevention, live ban test | ✅ Complete | [View](experiments/exp003-fail2ban.md) |
 | 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | ✅ Complete | [View](experiments/exp004-splunk-siem.md) |
 | 005 | Nessus — unauthenticated + credentialed vulnerability scan | ✅ Complete | [View](experiments/exp005-nessus-vulnerability-scan.md) |
-| 006 | Active Directory lab — Windows Server VM | ⏳ Planned | — |
+| 006 | Active Directory — Windows Server 2022, lab.local domain, AD DS, Splunk integration | ✅ Complete | [View](experiments/exp006-active-directory.md) |
 
 ## Incident Reports
 
@@ -154,6 +181,7 @@ reproducible, and portfolio-ready.
 | 3 | fail2ban | Dynamic blocking — bans IPs after 3 failed attempts |
 | 4 | Splunk SIEM | Real-time log ingestion, dashboards, and alerts |
 | 5 | Nessus | Vulnerability scanning — validates attack surface |
+| 6 | Active Directory | Identity & access management, AD event monitoring in Splunk |
 
 ---
 
@@ -169,6 +197,7 @@ reproducible, and portfolio-ready.
 | Intrusion prevention (fail2ban) | Security+ / CySA+ |
 | SIEM log ingestion & alerting | Security+ / CySA+ |
 | Vulnerability scanning (Nessus) | Security+ / CySA+ |
+| Active Directory & identity management | Security+ / CySA+ |
 
 ---
 
@@ -184,13 +213,17 @@ homelab-build/
 │   ├── exp003-fail2ban.md
 │   ├── exp004-splunk-siem.md
 │   ├── exp005-nessus-vulnerability-scan.md
+│   ├── exp006-active-directory.md
 │   └── images/
-│       ├── setup/
 │       ├── exp001/
 │       ├── exp002/
 │       ├── exp003/
 │       ├── exp004/
-│       └── exp005/
+│       ├── exp005/
+│       └── exp006/
+│           ├── setup/
+│           ├── config/
+│           └── verification/
 ```
 
 ---

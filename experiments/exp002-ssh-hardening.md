@@ -95,3 +95,4 @@ sudo sshd -T | grep -E "port|permitrootlogin|maxauthtries|logingracetime|x11forw
 - [Exp003 — fail2ban](exp003-fail2ban.md)
 - [Exp004 — Splunk SIEM](exp004-splunk-siem.md)
 - [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)
+- [Exp006 — Active Directory](exp006-active-directory.md)

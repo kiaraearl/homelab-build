@@ -1,7 +1,7 @@
 # Home Lab — Notes & Config
 
 ## Lab Status
-Last Updated: May 24, 2026
+Last Updated: May 25, 2026
 
 ---
 
@@ -14,6 +14,7 @@ Last Updated: May 24, 2026
 | Exp003 | fail2ban SSH Intrusion Prevention | ✅ Complete | 2026-05-24 |
 | Exp004 | Splunk SIEM Log Ingestion | ✅ Complete | 2026-05-24 |
 | Exp005 | Nessus Vulnerability Scan | ✅ Complete | 2026-05-24 |
+| Exp006 | Active Directory Domain Services | ✅ Complete | 2026-05-25 |
 
 Full write-ups in `/experiments/`
 
@@ -41,6 +42,7 @@ Full write-ups in `/experiments/`
 |---|---|---|
 | Ubuntu-Server-01 | 192.168.56.10 | Static (enp0s8) |
 | pfSense LAN | 192.168.56.2 | Static |
+| WinServer2022-DC01 | 192.168.56.20 | Static (Ethernet 2) |
 | DHCP Pool | 192.168.56.100 - 192.168.56.200 | Dynamic |
 
 ---
@@ -121,6 +123,54 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 
 ---
 
+## VM 003 — Windows Server 2022 Domain Controller
+
+### Specs
+- Name: WinServer2022-DC01
+- OS: Windows Server 2022 Standard Evaluation
+- RAM: 4GB
+- Storage: 50GB VDI (dynamically allocated)
+- Adapter 1: NAT — 10.0.2.15
+- Adapter 2 (Host-Only): 192.168.56.20 (static)
+
+### Credentials
+- Username: LAB\Administrator
+- Password: [see Bitwarden — "WinServer2022-DC01 - Administrator"]
+- DSRM Password: [see Bitwarden — "WinServer2022-DC01 - DSRM Password"]
+
+### Domain Info
+- Domain: lab.local
+- NetBIOS: LAB
+- Hostname: DC01
+- DNS: 127.0.0.1 (self)
+- PDC Emulator: DC01.lab.local
+
+### Domain Users
+| Name | Username | UPN | OU |
+|---|---|---|---|
+| Kiara Earl | kearl | kearl@lab.local | SOC_Team |
+| Jane Doe | jdoe | jdoe@lab.local | SOC_Team |
+| John Smith | jsmith | jsmith@lab.local | IT_Admin |
+
+### Splunk Universal Forwarder
+- Receiver: 192.168.56.1:9997
+- inputs.conf: C:\Program Files\SplunkUniversalForwarder\etc\system\local\
+- Sourcetype: WinEventLog:Security
+- Index: main
+
+### Status
+- [x] OS installed (Windows Server 2022 Standard Evaluation)
+- [x] Static IP assigned (192.168.56.20)
+- [x] Renamed to DC01
+- [x] AD DS role installed
+- [x] Promoted to Domain Controller
+- [x] Domain lab.local created
+- [x] OUs created (SOC_Team, IT_Admin, Workstations)
+- [x] Domain users created
+- [x] Splunk Universal Forwarder installed and shipping Security logs
+
+---
+
 ## Splunk (Windows Host)
 
 - Version: Splunk Enterprise 10.4.0
@@ -133,6 +183,7 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 ## ISOs
 - ubuntu-24.04.4-live-server-amd64.iso
 - netgate-installer-v1.2-RELEASE-amd64.iso
+- SERVER_EVAL_x64FRE_en-us.iso (Windows Server 2022 Standard Evaluation)
 
 ---
 
@@ -154,3 +205,4 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 | 3 | fail2ban (Exp003) | Dynamic blocking — bans IPs after 3 failed attempts |
 | 4 | Splunk SIEM (Exp004) | Real-time log ingestion, dashboards, and alerts |
 | 5 | Nessus (Exp005) | Vulnerability scanning — validates attack surface |
+| 6 | Active Directory (Exp006) | Identity & access management, AD event monitoring in Splunk |
