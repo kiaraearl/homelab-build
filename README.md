@@ -22,6 +22,7 @@ reproducible, and portfolio-ready.
 - [x] Simulate enterprise networking (firewall rules, DHCP, DNS)
 - [x] Run vulnerability assessments in a safe, isolated environment
 - [x] Build a functional SOC-like detection and monitoring setup
+- [x] Deploy a cloud SIEM and connect on-premises infrastructure via hybrid cloud
 - [x] Support Network+ and Security+ hands-on study
 
 ---
@@ -64,12 +65,15 @@ reproducible, and portfolio-ready.
     [Ubuntu Server VM]  ←  192.168.56.10
          |
     [WinServer2022-DC01]  ←  192.168.56.20 (Domain Controller — lab.local)
+         |
+    [Azure Cloud]  ←  DC01 Arc-connected → LAW-SOCLab → Microsoft Sentinel
 ```
 
 ### Network Config
 - **Host-Only Network:** `192.168.56.0/24`
 - **DHCP Pool:** `192.168.56.100 - 192.168.56.200` (managed by pfSense)
 - **Ubuntu SSH:** Port 2222, key-based auth only
+- **Shared Folder:** `C:\VMShare` (host) ↔ `Z:\` (WinServer2022-DC01)
 
 ---
 
@@ -97,30 +101,6 @@ reproducible, and portfolio-ready.
 
 ---
 
-### VM 003 — Windows Server 2022 Domain Controller
-**Purpose:** Active Directory, identity management, Windows event log generation
-
-| Setting | Value |
-|---|---|
-| OS | Windows Server 2022 Standard Evaluation |
-| RAM | 4GB |
-| Storage | 50GB dynamically allocated |
-| IP | 192.168.56.20 (static) |
-| Domain | lab.local |
-| Hostname | DC01 |
-
-**Progress:**
-- [x] OS installed
-- [x] Static IP assigned (192.168.56.20)
-- [x] Renamed to DC01
-- [x] AD DS role installed and configured
-- [x] Promoted to Domain Controller (lab.local)
-- [x] OUs created (SOC_Team, IT_Admin, Workstations)
-- [x] Domain users created (kearl, jdoe, jsmith)
-- [x] Splunk Universal Forwarder shipping Security logs to SIEM
-
----
-
 ### VM 002 — pfSense Firewall
 **Purpose:** Network segmentation, firewall rules, DHCP management
 
@@ -140,6 +120,34 @@ reproducible, and portfolio-ready.
 
 ---
 
+### VM 003 — Windows Server 2022 Domain Controller
+**Purpose:** Active Directory, identity management, Windows event log generation, Azure Arc endpoint
+
+| Setting | Value |
+|---|---|
+| OS | Windows Server 2022 Standard Evaluation |
+| RAM | 4GB |
+| Storage | 50GB dynamically allocated |
+| IP | 192.168.56.20 (static) |
+| Domain | lab.local |
+| Hostname | DC01 |
+
+**Progress:**
+- [x] OS installed
+- [x] Static IP assigned (192.168.56.20)
+- [x] Renamed to DC01
+- [x] AD DS role installed and configured
+- [x] Promoted to Domain Controller (lab.local)
+- [x] OUs created (SOC_Team, IT_Admin, Workstations)
+- [x] Domain users created (kearl, jdoe, jsmith)
+- [x] Splunk Universal Forwarder shipping Security logs to SIEM
+- [x] VirtualBox Guest Additions installed
+- [x] Shared folder configured (Z:\ → C:\VMShare)
+- [x] Azure Arc agent installed — DC01 registered as Arc-enabled server
+- [x] Azure Monitor Agent deployed — Windows Security Events flowing to Sentinel
+
+---
+
 ## Security Tooling
 
 | Tool | Purpose | Status |
@@ -149,6 +157,8 @@ reproducible, and portfolio-ready.
 | **Splunk Enterprise** | SIEM — log ingestion, dashboards, alerts | ✅ Complete |
 | **Nessus Essentials Plus** | Vulnerability scanning | ✅ Complete |
 | **Active Directory** | Identity & access management, Windows event monitoring | ✅ Complete |
+| **Microsoft Sentinel** | Cloud SIEM — KQL hunting, analytics rules, incident management | ✅ Complete |
+| **Azure Arc** | Hybrid cloud — on-prem server management from Azure | ✅ Complete |
 | **Wireshark** | Network traffic analysis | ⏳ Future |
 | **Snort / Suricata** | IDS/IPS practice | ⏳ Future |
 
@@ -164,12 +174,14 @@ reproducible, and portfolio-ready.
 | 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | ✅ Complete | [View](experiments/exp004-splunk-siem.md) |
 | 005 | Nessus — unauthenticated + credentialed vulnerability scan | ✅ Complete | [View](experiments/exp005-nessus-vulnerability-scan.md) |
 | 006 | Active Directory — Windows Server 2022, lab.local domain, AD DS, Splunk integration | ✅ Complete | [View](experiments/exp006-active-directory.md) |
+| 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | ✅ Complete | [View](experiments/exp007-azure-sentinel.md) |
 
 ## Incident Reports
 
 | ID | Title | Format |
 |---|---|---|
 | IR-2026-001 | SSH Brute Force Attack — Ubuntu-Server-01 | [PDF](incident-reports/IR-2026-001-SSH-BruteForce.pdf) |
+
 ---
 
 ## Defense Layers Built
@@ -182,6 +194,7 @@ reproducible, and portfolio-ready.
 | 4 | Splunk SIEM | Real-time log ingestion, dashboards, and alerts |
 | 5 | Nessus | Vulnerability scanning — validates attack surface |
 | 6 | Active Directory | Identity & access management, AD event monitoring in Splunk |
+| 7 | Microsoft Sentinel | Cloud SIEM — KQL detection, MITRE-mapped analytics rules, incident queue |
 
 ---
 
@@ -198,6 +211,9 @@ reproducible, and portfolio-ready.
 | SIEM log ingestion & alerting | Security+ / CySA+ |
 | Vulnerability scanning (Nessus) | Security+ / CySA+ |
 | Active Directory & identity management | Security+ / CySA+ |
+| Azure cloud fundamentals | AZ-900 |
+| Cloud security concepts | SC-900 |
+| Sentinel analytics rules, KQL, incident management | SC-200 |
 
 ---
 
@@ -214,16 +230,20 @@ homelab-build/
 │   ├── exp004-splunk-siem.md
 │   ├── exp005-nessus-vulnerability-scan.md
 │   ├── exp006-active-directory.md
+│   ├── exp007-azure-sentinel.md
 │   └── images/
 │       ├── exp001/
 │       ├── exp002/
 │       ├── exp003/
 │       ├── exp004/
 │       ├── exp005/
-│       └── exp006/
-│           ├── setup/
-│           ├── config/
-│           └── verification/
+│       ├── exp006/
+│       │   ├── setup/
+│       │   ├── config/
+│       │   └── verification/
+│       └── exp007/
+└── incident-reports/
+    └── IR-2026-001-SSH-BruteForce.pdf
 ```
 
 ---

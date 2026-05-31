@@ -1,7 +1,7 @@
 # Home Lab — Notes & Config
 
 ## Lab Status
-Last Updated: May 25, 2026
+Last Updated: May 31, 2026
 
 ---
 
@@ -15,6 +15,7 @@ Last Updated: May 25, 2026
 | Exp004 | Splunk SIEM Log Ingestion | ✅ Complete | 2026-05-24 |
 | Exp005 | Nessus Vulnerability Scan | ✅ Complete | 2026-05-24 |
 | Exp006 | Active Directory Domain Services | ✅ Complete | 2026-05-25 |
+| Exp007 | Microsoft Azure + Sentinel (Cloud SIEM) | ✅ Complete | 2026-05-31 |
 
 Full write-ups in `/experiments/`
 
@@ -44,6 +45,17 @@ Full write-ups in `/experiments/`
 | pfSense LAN | 192.168.56.2 | Static |
 | WinServer2022-DC01 | 192.168.56.20 | Static (Ethernet 2) |
 | DHCP Pool | 192.168.56.100 - 192.168.56.200 | Dynamic |
+
+---
+
+## Shared Folder — Host ↔ VMs
+
+| Host Path | VM | VM Drive | Notes |
+|---|---|---|---|
+| C:\VMShare | WinServer2022-DC01 | Z:\ | Auto-mount, permanent, bidirectional |
+
+Setup: VirtualBox → Devices → Shared Folders → Add → C:\VMShare, Auto-mount, Make Permanent
+Requires: VirtualBox Guest Additions installed on VM
 
 ---
 
@@ -158,6 +170,24 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - Sourcetype: WinEventLog:Security
 - Index: main
 
+### Azure Arc
+- Arc machine name: DC01
+- Resource group: RG-SOCLab
+- Status: Connected
+- Agent: himds (Azure Hybrid Instance Metadata Service)
+
+### Azure Monitor Agent
+- Version: 1.42.0.0
+- Extension: AzureMonitorWindowsAgent (via Arc)
+- Data Collection Rule: DCR-WinServer-SecurityEvents
+- Ships: All Windows Security Events → LAW-SOCLab
+
+### VirtualBox Guest Additions
+- Installed: Yes
+- Shared folder: Z:\ → C:\VMShare (host)
+- Clipboard: Bidirectional
+- Drag and drop: Bidirectional
+
 ### Status
 - [x] OS installed (Windows Server 2022 Standard Evaluation)
 - [x] Static IP assigned (192.168.56.20)
@@ -168,6 +198,11 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - [x] OUs created (SOC_Team, IT_Admin, Workstations)
 - [x] Domain users created
 - [x] Splunk Universal Forwarder installed and shipping Security logs
+- [x] VirtualBox Guest Additions installed
+- [x] Shared folder configured (Z:\ → C:\VMShare)
+- [x] Azure Arc agent installed (Connected)
+- [x] Azure Monitor Agent deployed (v1.42.0.0)
+- [x] Windows Security Events flowing to LAW-SOCLab
 
 ---
 
@@ -177,6 +212,30 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - Web UI: http://localhost:8000
 - Receiving port: 9997
 - Credentials: [see Bitwarden — "Splunk Enterprise - Home Lab"]
+
+---
+
+## Azure (Cloud)
+
+| Resource | Value |
+|---|---|
+| Account | Kimearls24@outlook.com |
+| Subscription | Azure subscription 1 |
+| Subscription ID | 06479c4b-a951-43d0-905c-e0b101ae740a |
+| Resource Group | RG-SOCLab |
+| Region | East US |
+| Log Analytics Workspace | LAW-SOCLab |
+| Sentinel | Enabled (free trial through 7/1/2026, 10 GB/day) |
+| Arc Machine | DC01 (WinServer2022-DC01) |
+| Data Connector | Windows Security Events via AMA |
+| Data Collection Rule | DCR-WinServer-SecurityEvents |
+| Analytics Rule | Brute Force - Multiple Failed Logons (High, T1110) |
+
+### Sentinel Saved Queries
+| Query Name | Description |
+|---|---|
+| Failed Logon Attempts - 4625 | Hunts for EventID 4625 — failed logons |
+| Brute Force Summary by Account | Summarizes failed logon count by account and computer |
 
 ---
 
@@ -193,6 +252,7 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - [x] Phase 3 — pfSense Firewall VM
 - [x] Phase 4 — Experiments
 - [x] Phase 5 — GitHub Documentation
+- [x] Phase 6 — Cloud SIEM (Azure + Sentinel)
 
 ---
 
@@ -206,3 +266,33 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 | 4 | Splunk SIEM (Exp004) | Real-time log ingestion, dashboards, and alerts |
 | 5 | Nessus (Exp005) | Vulnerability scanning — validates attack surface |
 | 6 | Active Directory (Exp006) | Identity & access management, AD event monitoring in Splunk |
+| 7 | Azure Sentinel (Exp007) | Cloud SIEM, hybrid log ingestion, KQL hunting, automated detection |
+
+---
+
+## Troubleshooting Reference
+
+### Azure Monitor Agent — Arc Extension on VirtualBox
+- Arc extension may report "Succeeded" in portal but AzureMonitorAgent service won't register on VM
+- This is a known timing issue with VirtualBox/NAT and Arc extension deployment
+- Verify Arc connectivity: `azcmagent check` — all endpoints should show Reachable: true
+- Verify extension files landed: `Get-ChildItem "C:\Packages\Plugins\Microsoft.Azure.Monitor.AzureMonitorWindowsAgent"`
+- Manual MSI install NOT supported on Windows Server — must use Arc extension
+- If extension fails repeatedly: delete extension in portal, wait 5 min, re-add via Sentinel Data Connectors → Windows Security Events via AMA → Create DCR (this triggers extension install through the proper Sentinel pathway)
+
+### PowerShell Script Execution from Shared Folder (Z:\)
+Scripts on network/mapped drives blocked by default execution policy. Fix before running any script from Z:\:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+.\scriptname.ps1
+```
+
+### WinEventLog Monitoring — Universal Forwarder on Windows
+CLI command `splunk add monitor WinEventLog://Security` does NOT work on Windows Universal Forwarder.
+Correct method — create inputs.conf at:
+`C:\Program Files\SplunkUniversalForwarder\etc\system\local\inputs.conf`
+```
+[WinEventLog://Security]
+index = main
+disabled = false
+```
