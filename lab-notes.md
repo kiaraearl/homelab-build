@@ -16,6 +16,7 @@ Last Updated: May 31, 2026
 | Exp005 | Nessus Vulnerability Scan | ✅ Complete | 2026-05-24 |
 | Exp006 | Active Directory Domain Services | ✅ Complete | 2026-05-25 |
 | Exp007 | Microsoft Azure + Sentinel (Cloud SIEM) | ✅ Complete | 2026-05-31 |
+| Exp008 | Pi-hole DNS Sinkhole | ✅ Complete | 2026-05-31 |
 
 Full write-ups in `/experiments/`
 
@@ -44,6 +45,8 @@ Full write-ups in `/experiments/`
 | Ubuntu-Server-01 | 192.168.56.10 | Static (enp0s8) |
 | pfSense LAN | 192.168.56.2 | Static |
 | WinServer2022-DC01 | 192.168.56.20 | Static (Ethernet 2) |
+| Win11-Workstation-01 (WS01) | 192.168.56.30 | Static |
+| Pihole-01 | 192.168.56.40 | Static (enp0s3) |
 | DHCP Pool | 192.168.56.100 - 192.168.56.200 | Dynamic |
 
 ---
@@ -63,9 +66,9 @@ Requires: VirtualBox Guest Additions installed on VM
 
 ### Specs
 - Name: Ubuntu-Server-01
-- OS: Ubuntu Server 24.04.4 LTS
-- RAM: 2GB
-- Storage: 20GB VDI (dynamically allocated)
+- OS: Ubuntu Server 24.04.4 LTS + GNOME Desktop
+- RAM: 4GB
+- Storage: 40GB VDI (expanded from 20GB)
 - Adapter 1 (enp0s3): NAT — 10.0.2.15
 - Adapter 2 (enp0s8): Host-Only — 192.168.56.10 (static)
 
@@ -100,6 +103,8 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - [x] Splunk Universal Forwarder installed (see Exp004)
 - [x] Nessus credentialed scan validated (see Exp005)
 - [x] All updates applied (apt update && apt upgrade)
+- [x] Ubuntu Desktop (GNOME) installed
+- [x] Disk expanded to 40GB (lvextend + resize2fs)
 
 ---
 
@@ -206,6 +211,89 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 
 ---
 
+## VM 004 — Windows 11 Workstation
+
+### Specs
+- Name: Win11-Workstation-01
+- OS: Windows 11 Pro
+- RAM: 4GB
+- Storage: 60GB VDI (dynamically allocated)
+- Adapter 1: Host-Only — 192.168.56.30 (static)
+
+### Credentials
+- Username: WS01\kearl (local) or LAB\kearl (domain)
+- Password: [see Bitwarden]
+
+### Domain Info
+- Full device name: WS01.lab.local
+- Joined to: lab.local
+- DNS: 192.168.56.40 (Pi-hole)
+
+### Notes
+- TPM bypass applied via registry LabConfig key during install (no UEFI — boot order fix)
+- LabConfig path: HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig
+- BypassTPMCheck = 1, BypassSecureBootCheck = 1
+
+### Status
+- [x] Windows 11 Pro installed
+- [x] Static IP assigned (192.168.56.30)
+- [x] Joined to lab.local domain
+- [x] Visible in ADUC on DC01
+- [x] DNS pointed to Pi-hole (192.168.56.40)
+
+---
+
+## VM 005 — Pihole-01
+
+### Specs
+- Name: Pihole-01
+- OS: Ubuntu Server 24.04.4 LTS
+- RAM: 1GB
+- CPU: 1 vCPU
+- Storage: 10GB VDI
+- Adapter 1 (enp0s3): Host-Only — 192.168.56.40 (static)
+- Adapter 2 (enp0s8): NAT — temporary (used for Pi-hole install only)
+
+### Credentials
+- Username: kearl
+- Password: [see Bitwarden]
+
+### SSH Access
+```bash
+ssh kearl@192.168.56.40
+```
+
+### Pi-hole Dashboard
+```
+http://192.168.56.40/admin
+```
+
+### Pi-hole Config
+- Upstream DNS: Cloudflare (1.1.1.1) with DNSSEC
+- Blocklist: StevenBlack's Unified Hosts List (81,382 domains)
+- Query logging: Enabled — Show everything
+- Whitelisted domains: youtube.com, googlevideo.com, ytimg.com, ggpht.com
+
+### Key Commands
+```bash
+sudo pihole status           # check Pi-hole status
+sudo pihole setpassword      # change admin password
+sudo pihole -g               # update gravity (refresh blocklists)
+sudo pihole restartdns       # restart DNS service
+```
+
+### Status
+- [x] Ubuntu Server 24.04 installed
+- [x] Static IP assigned (192.168.56.40)
+- [x] Pi-hole installed and active
+- [x] 81,382 domains on blocklist
+- [x] Dashboard accessible at http://192.168.56.40/admin
+- [x] Query logging active
+- [x] WS01 DNS pointed to Pi-hole
+- [x] YouTube domains whitelisted
+
+---
+
 ## Splunk (Windows Host)
 
 - Version: Splunk Enterprise 10.4.0
@@ -243,6 +331,7 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - ubuntu-24.04.4-live-server-amd64.iso
 - netgate-installer-v1.2-RELEASE-amd64.iso
 - SERVER_EVAL_x64FRE_en-us.iso (Windows Server 2022 Standard Evaluation)
+- Win11_25H2_English_x64_v2.iso (Windows 11 Pro)
 
 ---
 
@@ -253,6 +342,7 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - [x] Phase 4 — Experiments
 - [x] Phase 5 — GitHub Documentation
 - [x] Phase 6 — Cloud SIEM (Azure + Sentinel)
+- [x] Phase 7 — Windows Endpoint + DNS Sinkhole
 
 ---
 
@@ -267,6 +357,7 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 | 5 | Nessus (Exp005) | Vulnerability scanning — validates attack surface |
 | 6 | Active Directory (Exp006) | Identity & access management, AD event monitoring in Splunk |
 | 7 | Azure Sentinel (Exp007) | Cloud SIEM, hybrid log ingestion, KQL hunting, automated detection |
+| 8 | Pi-hole DNS Sinkhole (Exp008) | Blocks 81,382 ad/tracking/malicious domains at DNS level |
 
 ---
 
@@ -278,7 +369,7 @@ ssh -p 2222 -i C:\Users\Kimea\.ssh\id_ed25519 kearl@192.168.56.10
 - Verify Arc connectivity: `azcmagent check` — all endpoints should show Reachable: true
 - Verify extension files landed: `Get-ChildItem "C:\Packages\Plugins\Microsoft.Azure.Monitor.AzureMonitorWindowsAgent"`
 - Manual MSI install NOT supported on Windows Server — must use Arc extension
-- If extension fails repeatedly: delete extension in portal, wait 5 min, re-add via Sentinel Data Connectors → Windows Security Events via AMA → Create DCR (this triggers extension install through the proper Sentinel pathway)
+- If extension fails repeatedly: delete extension in portal, wait 5 min, re-add via Sentinel Data Connectors → Windows Security Events via AMA → Create DCR
 
 ### PowerShell Script Execution from Shared Folder (Z:\)
 Scripts on network/mapped drives blocked by default execution policy. Fix before running any script from Z:\:
@@ -296,3 +387,22 @@ Correct method — create inputs.conf at:
 index = main
 disabled = false
 ```
+
+### Pi-hole Installation on Ubuntu 24.04
+- `dhclient` not available — use `sudo networkctl up <interface>` to bring up adapter and get DHCP
+- If curl fails to reach install.pi-hole.net: add NAT adapter, bring it up, delete Host-Only default route, use `curl --interface <nat_interface>`
+- All pihole CLI commands require sudo on Ubuntu 24.04
+- Password change command: `sudo pihole setpassword` (not `pihole -a -p`)
+
+### Windows 11 VM — TPM/Secure Boot Bypass
+Windows 11 installer blocks installation if TPM 2.0 or Secure Boot not detected.
+Fix — during installer press Shift+F10 to open CMD, then:
+```
+regedit
+```
+Navigate to: `HKEY_LOCAL_MACHINE\SYSTEM\Setup`
+Create key: `LabConfig`
+Add DWORD values:
+- `BypassTPMCheck` = 1
+- `BypassSecureBootCheck` = 1
+Close regedit and continue installation normally.
