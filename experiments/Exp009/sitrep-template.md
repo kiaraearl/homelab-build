@@ -1,6 +1,6 @@
 # SITUATION REPORT (SITREP)
 
-**Incident #:** INC0010023 (placeholder — update once ServiceNow PDI is live)
+**Incident #:** INC0010007
 **Date/Time:** 2026-06-15 09:00 EST
 **Prepared by:** Kiara Earl, Tier 1 CIC Analyst
 **Classification:** Security Incident — Brute Force Authentication Attempt
@@ -21,7 +21,7 @@ Microsoft Sentinel analytics rule (High severity, MITRE ATT&CK T1110 - Brute For
 | Time | Action |
 |------|--------|
 | 08:47 | Alert triggered (Sentinel + Splunk) |
-| 08:50 | Tier 1 acknowledged, opened INC0010023 |
+| 08:50 | Tier 1 acknowledged, opened INC0010007 |
 | 08:55 | Verified failed login pattern in auth.log; confirmed fail2ban ban active |
 | 09:10 | Escalated to Tier 2 for pfSense permanent block review |
 | 09:30 | pfSense rule updated — source IP blocked at firewall level |
