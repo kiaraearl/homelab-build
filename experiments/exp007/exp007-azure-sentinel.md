@@ -206,9 +206,9 @@ Generated 6 failed logon attempts on WinServer2022-DC01 using `Z:\failedlogins.p
 ---
 
 ## Related Experiments
-- [Exp001 — pfSense Firewall Rules](exp001-pfsense-firewall-rules.md)
-- [Exp002 — SSH Hardening](exp002-ssh-hardening.md)
-- [Exp003 — fail2ban](exp003-fail2ban.md)
-- [Exp004 — Splunk SIEM](exp004-splunk-siem.md)
-- [Exp005 — Nessus Vulnerability Scan](exp005-nessus-vulnerability-scan.md)
-- [Exp006 — Active Directory Domain Services](exp006-active-directory.md)
+- [Exp001 — pfSense Firewall Rules](../Exp001/exp001-pfsense-firewall-rules.md)
+- [Exp002 — SSH Hardening](../Exp002/exp002-ssh-hardening.md)
+- [Exp003 — fail2ban](../Exp003/exp003-fail2ban.md)
+- [Exp004 — Splunk SIEM](../Exp004/exp004-splunk-siem.md)
+- [Exp005 — Nessus Vulnerability Scan](../Exp005/exp005-nessus-vulnerability-scan.md)
+- [Exp006 — Active Directory Domain Services](../Exp006/exp006-active-directory.md)
