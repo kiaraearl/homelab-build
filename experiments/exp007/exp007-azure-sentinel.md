@@ -4,7 +4,7 @@
 | | |
 |---|---|
 | **Date** | May 31, 2026 |
-| **Status** | ✅ Complete |
+| **Status** | Complete |
 | **Difficulty** | Intermediate |
 | **Time** | ~4 hours |
 | **Platform** | Microsoft Azure (cloud) |

@@ -9,14 +9,14 @@ Last Updated: May 31, 2026
 
 | Exp | Title | Status | Date |
 |---|---|---|---|
-| Exp001 | pfSense Firewall Rules | ✅ Complete | 2026-05-23 |
-| Exp002 | SSH Hardening | ✅ Complete | 2026-05-23 |
-| Exp003 | fail2ban SSH Intrusion Prevention | ✅ Complete | 2026-05-24 |
-| Exp004 | Splunk SIEM Log Ingestion | ✅ Complete | 2026-05-24 |
-| Exp005 | Nessus Vulnerability Scan | ✅ Complete | 2026-05-24 |
-| Exp006 | Active Directory Domain Services | ✅ Complete | 2026-05-25 |
-| Exp007 | Microsoft Azure + Sentinel (Cloud SIEM) | ✅ Complete | 2026-05-31 |
-| Exp008 | Pi-hole DNS Sinkhole | ✅ Complete | 2026-05-31 |
+| Exp001 | pfSense Firewall Rules | Complete | 2026-05-23 |
+| Exp002 | SSH Hardening | Complete | 2026-05-23 |
+| Exp003 | fail2ban SSH Intrusion Prevention | Complete | 2026-05-24 |
+| Exp004 | Splunk SIEM Log Ingestion | Complete | 2026-05-24 |
+| Exp005 | Nessus Vulnerability Scan | Complete | 2026-05-24 |
+| Exp006 | Active Directory Domain Services | Complete | 2026-05-25 |
+| Exp007 | Microsoft Azure + Sentinel (Cloud SIEM) | Complete | 2026-05-31 |
+| Exp008 | Pi-hole DNS Sinkhole | Complete | 2026-05-31 |
 
 Full write-ups in `/experiments/`
 

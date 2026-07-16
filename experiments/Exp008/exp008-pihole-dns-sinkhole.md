@@ -4,7 +4,7 @@
 | | |
 |---|---|
 | **Date** | May 31, 2026 |
-| **Status** | ✅ Complete |
+| **Status** | Complete |
 | **Difficulty** | Beginner–Intermediate |
 | **Time** | ~2 hours |
 | **Platform** | VirtualBox (Ubuntu Server 24.04 VM) |
@@ -216,12 +216,12 @@ ipconfig /flushdns
 
 | Check | Result |
 |---|---|
-| Pi-hole dashboard accessible at 192.168.56.40/admin | ✅ |
-| Status shows Active | ✅ |
-| 81,382 domains on blocklist | ✅ |
-| Query log showing traffic from WS01 (192.168.56.30) | ✅ |
-| Query log showing traffic from host (192.168.56.1) | ✅ |
-| YouTube domains whitelisted and functional | ✅ |
+| Pi-hole dashboard accessible at 192.168.56.40/admin | Pass |
+| Status shows Active | Pass |
+| 81,382 domains on blocklist | Pass |
+| Query log showing traffic from WS01 (192.168.56.30) | Pass |
+| Query log showing traffic from host (192.168.56.1) | Pass |
+| YouTube domains whitelisted and functional | Pass |
 
 ---
 

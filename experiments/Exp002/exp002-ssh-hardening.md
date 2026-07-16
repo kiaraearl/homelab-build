@@ -6,7 +6,7 @@
 | **Experiment** | Exp002 |
 | **Title** | SSH Hardening |
 | **Date** | 2026-05-23 |
-| **Status** | ✅ Complete |
+| **Status** | Complete |
 | **System** | Ubuntu-Server-01 @ 192.168.56.10 |
 | **Cert Connection** | Security+ / CySA+ |
 
@@ -63,8 +63,8 @@ SSH is the most commonly targeted remote access service on Linux systems. Defaul
 sudo sshd -T | grep -E "port|permitrootlogin|maxauthtries|logingracetime|x11forwarding"
 ```
 
-- Tested password login with `-o PreferredAuthentications=password` — returned `Permission denied (publickey)` ✅
-- Confirmed key-based login works with passphrase ✅
+- Tested password login with `-o PreferredAuthentications=password` — returned `Permission denied (publickey)`
+- Confirmed key-based login works with passphrase
 
 ---
 

@@ -6,7 +6,7 @@
 | **Experiment** | Exp006 |
 | **Title** | Active Directory Domain Services |
 | **Date** | 2026-05-25 |
-| **Status** | ✅ Complete |
+| **Status** | Complete |
 | **System** | WinServer2022-DC01 @ 192.168.56.20 |
 | **Cert Connection** | Security+ / CySA+ / Network+ |
 
@@ -129,7 +129,7 @@ Splunk search confirming log ingestion:
 ```
 index=main sourcetype="WinEventLog:Security"
 ```
-Result: 304 events, host = DC01 ✅
+Result: 304 events, host = DC01
 
 ---
 

@@ -1,4 +1,4 @@
-# Home Lab Build — Documentation 🖥️
+# Home Lab Build — Documentation
 
 > Ongoing documentation of my personal cybersecurity home lab —
 > hardware specs, VM setup, network configuration, and security experiments.
@@ -49,13 +49,13 @@ reproducible, and portfolio-ready.
 
 | Tool | Purpose | Status |
 |---|---|---|
-| **VirtualBox** | Primary hypervisor for all VMs | ✅ Complete |
-| **pfSense CE** | Firewall / router VM — network segmentation | ✅ Complete |
-| **Ubuntu Server 24.04** | Linux server + desktop environment | ✅ Complete |
-| **Windows Server 2022** | Active Directory Domain Controller — lab.local | ✅ Complete |
-| **Windows 11 Pro** | Domain-joined endpoint — troubleshooting labs | ✅ Complete |
-| **Pi-hole (Ubuntu Server)** | DNS sinkhole — network-wide ad/threat blocking | ✅ Complete |
-| **Kali Linux** | Offensive security tooling practice | ⏳ Future |
+| **VirtualBox** | Primary hypervisor for all VMs | Complete |
+| **pfSense CE** | Firewall / router VM — network segmentation | Complete |
+| **Ubuntu Server 24.04** | Linux server + desktop environment | Complete |
+| **Windows Server 2022** | Active Directory Domain Controller — lab.local | Complete |
+| **Windows 11 Pro** | Domain-joined endpoint — troubleshooting labs | Complete |
+| **Pi-hole (Ubuntu Server)** | DNS sinkhole — network-wide ad/threat blocking | Complete |
+| **Kali Linux** | Offensive security tooling practice | Future |
 
 ---
 
@@ -209,17 +209,17 @@ reproducible, and portfolio-ready.
 
 | Tool | Purpose | Status |
 |---|---|---|
-| **pfSense** | Firewall — default deny ruleset | ✅ Complete |
-| **fail2ban** | SSH brute force prevention | ✅ Complete |
-| **Splunk Enterprise** | SIEM — log ingestion, dashboards, alerts | ✅ Complete |
-| **Nessus Essentials Plus** | Vulnerability scanning | ✅ Complete |
-| **Active Directory** | Identity & access management, Windows event monitoring | ✅ Complete |
-| **Microsoft Sentinel** | Cloud SIEM — KQL hunting, analytics rules, incident management | ✅ Complete |
-| **Azure Arc** | Hybrid cloud — on-prem server management from Azure | ✅ Complete |
-| **Pi-hole** | DNS sinkhole — network-wide ad and malicious domain blocking | ✅ Complete |
-| **Wireshark** | Network traffic analysis | ⏳ Future |
-| **Snort / Suricata** | IDS/IPS practice | ⏳ Future |
-| **Kali Linux** | Offensive security tooling | ⏳ Future |
+| **pfSense** | Firewall — default deny ruleset | Complete |
+| **fail2ban** | SSH brute force prevention | Complete |
+| **Splunk Enterprise** | SIEM — log ingestion, dashboards, alerts | Complete |
+| **Nessus Essentials Plus** | Vulnerability scanning | Complete |
+| **Active Directory** | Identity & access management, Windows event monitoring | Complete |
+| **Microsoft Sentinel** | Cloud SIEM — KQL hunting, analytics rules, incident management | Complete |
+| **Azure Arc** | Hybrid cloud — on-prem server management from Azure | Complete |
+| **Pi-hole** | DNS sinkhole — network-wide ad and malicious domain blocking | Complete |
+| **Wireshark** | Network traffic analysis | Future |
+| **Snort / Suricata** | IDS/IPS practice | Future |
+| **Kali Linux** | Offensive security tooling | Future |
 
 ---
 
@@ -227,14 +227,15 @@ reproducible, and portfolio-ready.
 
 | # | Experiment | Status | Write-Up |
 |---|---|---|---|
-| 001 | pfSense firewall rule configuration — default deny ruleset | ✅ Complete | [View](experiments/exp001-pfsense-firewall-rules.md) |
-| 002 | SSH hardening — port 2222, key auth, disable root & passwords | ✅ Complete | [View](experiments/exp002-ssh-hardening.md) |
-| 003 | fail2ban — SSH intrusion prevention, live ban test | ✅ Complete | [View](experiments/exp003-fail2ban.md) |
-| 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | ✅ Complete | [View](experiments/exp004-splunk-siem.md) |
-| 005 | Nessus — unauthenticated + credentialed vulnerability scan | ✅ Complete | [View](experiments/exp005-nessus-vulnerability-scan.md) |
-| 006 | Active Directory — Windows Server 2022, lab.local domain, AD DS, Splunk integration | ✅ Complete | [View](experiments/exp006-active-directory.md) |
-| 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | ✅ Complete | [View](experiments/exp007-azure-sentinel.md) |
-| 008 | Pi-hole DNS Sinkhole — network-wide DNS filtering, 81k+ domain blocklist, live query monitoring | ✅ Complete | [View](experiments/exp008-pihole-dns-sinkhole.md) |
+| 001 | pfSense firewall rule configuration — default deny ruleset | Complete | [View](experiments/Exp001/exp001-pfsense-firewall-rules.md) |
+| 002 | SSH hardening — port 2222, key auth, disable root & passwords | Complete | [View](experiments/Exp002/exp002-ssh-hardening.md) |
+| 003 | fail2ban — SSH intrusion prevention, live ban test | Complete | [View](experiments/Exp003/exp003-fail2ban.md) |
+| 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | Complete | [View](experiments/Exp004/exp004-splunk-siem.md) |
+| 005 | Nessus — unauthenticated + credentialed vulnerability scan | Complete | [View](experiments/Exp005/exp005-nessus-vulnerability-scan.md) |
+| 006 | Active Directory — Windows Server 2022, lab.local domain, AD DS, Splunk integration | Complete | [View](experiments/Exp006/exp006-active-directory.md) |
+| 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | Complete | [View](experiments/exp007/exp007-azure-sentinel.md) |
+| 008 | Pi-hole DNS Sinkhole — network-wide DNS filtering, 81k+ domain blocklist, live query monitoring | Complete | [View](experiments/Exp008/exp008-pihole-dns-sinkhole.md) |
+| 009 | CIC Incident Operations — SITREP, break/fix runbook, exec summary, ServiceNow lifecycle | Complete | [View](experiments/Exp009/sitrep-template.md) |
 
 ## Incident Reports
 
@@ -322,9 +323,9 @@ homelab-build/
 
 **Kiara Earl**
 CompTIA A+ Certified | WGU B.S. Cybersecurity & Information Assurance (Expected 2027)
-📧 kimearls24@outlook.com
-📍 Houston, TX
-🔗 [Portfolio](https://kiaraearl.github.io) | [GitHub](https://github.com/kiaraearl)
+kimearls24@outlook.com
+Houston, TX
+[Portfolio](https://kiaraearl.github.io) | [GitHub](https://github.com/kiaraearl)
 
 ---
 

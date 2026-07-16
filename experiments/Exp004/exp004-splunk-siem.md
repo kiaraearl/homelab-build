@@ -6,7 +6,7 @@
 | **Experiment** | Exp004 |
 | **Title** | Splunk SIEM Log Ingestion |
 | **Date** | 2026-05-24 |
-| **Status** | ✅ Complete |
+| **Status** | Complete |
 | **Systems** | Ubuntu-Server-01 → Windows Host |
 | **Cert Connection** | Security+ / CySA+ |
 

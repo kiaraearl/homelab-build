@@ -6,7 +6,7 @@
 | **Experiment** | Exp003 |
 | **Title** | fail2ban SSH Intrusion Prevention |
 | **Date** | 2026-05-24 |
-| **Status** | ✅ Complete |
+| **Status** | Complete |
 | **System** | Ubuntu-Server-01 @ 192.168.56.10 |
 | **Cert Connection** | Security+ / CySA+ |
 
@@ -108,7 +108,7 @@ Result from fail2ban.log:
 00:55:36 - NOTICE [sshd] Ban 192.168.56.1
 ```
 
-Ban fired on exactly the 3rd attempt within 4 seconds. ✅
+Ban fired on exactly the 3rd attempt within 4 seconds.
 
 **Note:** The ban dropped the active SSH session — all connections from a banned IP are terminated immediately including existing sessions. Recovery required direct console access to unban.
 
