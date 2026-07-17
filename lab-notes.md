@@ -17,6 +17,8 @@ Last Updated: May 31, 2026
 | Exp006 | Active Directory Domain Services | Complete | 2026-05-25 |
 | Exp007 | Microsoft Azure + Sentinel (Cloud SIEM) | Complete | 2026-05-31 |
 | Exp008 | Pi-hole DNS Sinkhole | Complete | 2026-05-31 |
+| Exp009 | CIC Incident Operations | Complete | 2026-06-15 |
+| Exp010 | Wazuh EDR Deployment | Complete | 2026-07-17 |
 
 Full write-ups in `/experiments/`
 

@@ -146,36 +146,36 @@ Result: 304 events, host = DC01
 ---
 
 ## Screenshots
-- `images/setup/exp006-01-ws2022-iso-download.png`
-- `images/setup/exp006-02-vbox-vm-name-iso.png`
-- `images/setup/exp006-02-vbox-vm-hardware-disk.png`
-- `images/setup/exp006-03-vbox-network-hostonly.png`
-- `images/setup/exp006-04-ws2022-setup-start.png`
-- `images/setup/exp006-05-ws2022-edition-select.png`
-- `images/setup/exp006-06-ws2022-installing.png`
-- `images/setup/exp006-07-ws2022-admin-password.png`
-- `images/setup/exp006-08-ws2022-server-manager.png`
-- `images/setup/exp006-09-ws2022-desktop-clean.png`
-- `images/config/exp006-10-ws2022-static-ip.png`
-- `images/config/exp006-11-ws2022-ipconfig-verified.png`
-- `images/config/exp006-12-ws2022-renamed-dc01.png`
-- `images/config/exp006-13-adds-role-selected.png`
-- `images/config/exp006-13-adds-confirmation.png`
-- `images/config/exp006-14-adds-install-complete.png`
-- `images/config/exp006-15-adds-new-forest.png`
-- `images/config/exp006-16-adds-dc-options.png`
-- `images/config/exp006-17-adds-prerequisites-passed.png`
-- `images/verification/exp006-18-adds-domain-login-screen.png`
-- `images/verification/exp006-19-adds-domain-desktop.png`
-- `images/verification/exp006-20-adds-get-addomain.png`
-- `images/verification/exp006-21-adds-ous-created.png`
-- `images/verification/exp006-22-aduc-open.png`
-- `images/verification/exp006-23-aduc-ou-structure.png`
-- `images/verification/exp006-24-aduc-users-created.png`
-- `images/verification/exp006-25-aduc-users-verified.png`
-- `images/verification/exp006-26-event-viewer-security-log.png`
-- `images/verification/exp006-27-uf-indexer-config.png`
-- `images/verification/exp006-28-splunk-ad-logs.png`
+- `Setup Images/Network Config/exp006-01-ws2022-iso-download.png`
+- `Setup Images/Network Config/exp006-02-vbox-vm-name-iso.png`
+- `Setup Images/Network Config/exp006-02-vbox-vm-hardware-disk.png`
+- `Setup Images/Network Config/exp006-03-vbox-network-hostonly.png`
+- `Setup Images/Network Config/exp006-04-ws2022-setup-start.png`
+- `Setup Images/Network Config/exp006-05-ws2022-edition-select.png`
+- `Setup Images/Network Config/exp006-06-ws2022-installing.png`
+- `Setup Images/Network Config/exp006-07-ws2022-admin-password.png`
+- `Setup Images/Network Config/exp006-08-ws2022-server-manager.png`
+- `Setup Images/Network Config/exp006-09-ws2022-server-manager-clean.png`
+- `Setup Images/Config/exp006-10-ws2022-static-ip.png`
+- `Setup Images/Config/exp006-11-ws2022-ipconfig-verified.png`
+- `Setup Images/Config/exp006-12-ws2022-renamed-dc01.png`
+- `Setup Images/Config/exp006-13-adds-role-selected.png`
+- `Setup Images/Config/exp006-13-adds-confirmation.png`
+- `Setup Images/Config/exp006-14-adds-install-complete.png`
+- `Setup Images/Config/exp006-15-adds-new-forest.png`
+- `Setup Images/Config/exp006-16-adds-dc-options.png`
+- `Setup Images/Config/exp006-17-adds-prerequisites-passed.png`
+- `Setup Images/Verification/exp006-18-adds-domain-login-screen.png`
+- `Setup Images/Verification/exp006-19-adds-domain-desktop.png`
+- `Setup Images/Verification/exp006-20-adds-get-addomain.png`
+- `Setup Images/Verification/exp006-21-adds-ous-created.png`
+- `Setup Images/Verification/exp006-22-aduc-open.png`
+- `Setup Images/Verification/exp006-23-aduc-ou-structure.png`
+- `Setup Images/Verification/exp006-24-aduc-users-created.png`
+- `Setup Images/Verification/exp006-25-aduc-users-verified.png`
+- `Setup Images/Verification/exp006-26-event-viewer-security-log.png`
+- `Setup Images/Verification/exp006-27-uf-indexer-config.png`
+- `Setup Images/Verification/exp006-28-splunk-ad-logs.png`
 
 ---
 

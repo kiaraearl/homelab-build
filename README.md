@@ -236,6 +236,7 @@ reproducible, and portfolio-ready.
 | 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | Complete | [View](experiments/exp007/exp007-azure-sentinel.md) |
 | 008 | Pi-hole DNS Sinkhole — network-wide DNS filtering, 81k+ domain blocklist, live query monitoring | Complete | [View](experiments/Exp008/exp008-pihole-dns-sinkhole.md) |
 | 009 | CIC Incident Operations — SITREP, break/fix runbook, exec summary, ServiceNow lifecycle | Complete | [View](experiments/Exp009/sitrep-template.md) |
+| 010 | Wazuh EDR — Linux/Windows agent deployment, FIM, brute-force detection, Active Response, vulnerability scanning | Complete | [View](experiments/Exp010/exp010-wazuh-edr.md) |
 
 ## Incident Reports
 

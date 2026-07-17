@@ -56,7 +56,7 @@ Firewalls are the first line of defense in any network. The default pfSense rule
 ---
 
 ## Screenshots
-- `images/exp001/exp001-01-pfsense-firewall-rules.png` — final ruleset with default rules disabled
+- `images/exp001-01-pfsense-firewall-rules.png` — final ruleset with default rules disabled
 
 ---
 

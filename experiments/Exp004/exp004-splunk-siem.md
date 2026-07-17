@@ -134,16 +134,16 @@ index=main sourcetype=linux_secure "Failed password" | timechart count by host
 ---
 
 ## Screenshots
-- `images/exp004/exp004-01-splunk-login.png`
-- `images/exp004/exp004-02-splunk-receiving-port.png`
-- `images/exp004/exp004-03-splunk-firewall-rule.png`
-- `images/exp004/exp004-04-splunk-first-events.png`
-- `images/exp004/exp004-05-splunk-failed-password-events.png`
-- `images/exp004/exp004-06-fail2ban-ban-event.png`
-- `images/exp004/exp004-07-splunk-fail2ban-events.png`
-- `images/exp004/exp004-08-splunk-dashboard-chart.png`
-- `images/exp004/exp004-09-splunk-dashboard-final.png`
-- `images/exp004/exp004-10-splunk-alert-setup.png`
+- `images/exp004-01-splunk-login.png`
+- `images/exp004-02-splunk-receiving-port.png`
+- `images/exp004-03-splunk-firewall-rule.png`
+- `images/exp004-04-splunk-first-events.png`
+- `images/exp004-05-splunk-failed-password-events.png`
+- `images/exp004-06-fail2ban-ban-event.png`
+- `images/exp004-07-splunk-fail2ban-events.png`
+- `images/exp004-08-splunk-dashboard-chart.png`
+- `images/exp004-09-splunk-dashboard-final.png`
+- `images/exp004-10-splunk-alert-setup.png`
 
 ---
 

@@ -69,8 +69,8 @@ sudo sshd -T | grep -E "port|permitrootlogin|maxauthtries|logingracetime|x11forw
 ---
 
 ## Screenshots
-- `images/exp002/exp002-01-ssh-hardening-verified.png` — hardening settings confirmed live
-- `images/exp002/exp002-02-ssh-password-disabled.png` — password authentication rejected
+- `images/exp002-01-ssh-hardening-verified.png` — hardening settings confirmed live
+- `images/exp002-02-ssh-password-disabled.png` — password authentication rejected
 
 ---
 

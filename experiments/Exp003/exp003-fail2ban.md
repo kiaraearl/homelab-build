@@ -124,10 +124,10 @@ Final status:
 ---
 
 ## Screenshots
-- `images/exp003/exp003-01-jail-active.png`
-- `images/exp003/exp003-02-ban-fired.png`
-- `images/exp003/exp003-03-config-verified.png`
-- `images/exp003/exp003-04-clean-ban.png`
+- `images/exp003-01-jail-active.png`
+- `images/exp003-02-ban-fired.png`
+- `images/exp003-03-config-verified.png`
+- `images/exp003-04-clean-ban.png`
 
 ---
 
