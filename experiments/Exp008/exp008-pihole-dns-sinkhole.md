@@ -287,4 +287,4 @@ ipconfig /flushdns
 - [Exp004 — Splunk SIEM](../Exp004/exp004-splunk-siem.md)
 - [Exp005 — Nessus Vulnerability Scan](../Exp005/exp005-nessus-vulnerability-scan.md)
 - [Exp006 — Active Directory](../Exp006/exp006-active-directory.md)
-- [Exp007 — Microsoft Azure + Sentinel](../exp007/exp007-azure-sentinel.md)
+- [Exp007 — Microsoft Azure + Sentinel](../Exp007/exp007-azure-sentinel.md)

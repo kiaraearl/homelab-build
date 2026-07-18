@@ -233,7 +233,7 @@ reproducible, and portfolio-ready.
 | 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | Complete | [View](experiments/Exp004/exp004-splunk-siem.md) |
 | 005 | Nessus — unauthenticated + credentialed vulnerability scan | Complete | [View](experiments/Exp005/exp005-nessus-vulnerability-scan.md) |
 | 006 | Active Directory — Windows Server 2022, lab.local domain, AD DS, Splunk integration | Complete | [View](experiments/Exp006/exp006-active-directory.md) |
-| 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | Complete | [View](experiments/exp007/exp007-azure-sentinel.md) |
+| 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | Complete | [View](experiments/Exp007/exp007-azure-sentinel.md) |
 | 008 | Pi-hole DNS Sinkhole — network-wide DNS filtering, 81k+ domain blocklist, live query monitoring | Complete | [View](experiments/Exp008/exp008-pihole-dns-sinkhole.md) |
 | 009 | CIC Incident Operations — SITREP, break/fix runbook, exec summary, ServiceNow lifecycle | Complete | [View](experiments/Exp009/sitrep-template.md) |
 | 010 | Wazuh EDR — Linux/Windows agent deployment, FIM, brute-force detection, Active Response, vulnerability scanning | Complete | [View](experiments/Exp010/exp010-wazuh-edr.md) |
@@ -287,31 +287,47 @@ reproducible, and portfolio-ready.
 ```
 homelab-build/
 ├── README.md
-├── lab-notes.md              ← VM specs, network config, credentials reference
+├── lab-notes.md                          ← VM specs, network config, credentials reference
 ├── experiments/
-│   ├── exp001-pfsense-firewall-rules.md
-│   ├── exp002-ssh-hardening.md
-│   ├── exp003-fail2ban.md
-│   ├── exp004-splunk-siem.md
-│   ├── exp005-nessus-vulnerability-scan.md
-│   ├── exp006-active-directory.md
-│   ├── exp007-azure-sentinel.md
-│   ├── exp008-pihole-dns-sinkhole.md
-│   └── images/
-│       ├── exp001/
-│       ├── exp002/
-│       ├── exp003/
-│       ├── exp004/
-│       ├── exp005/
-│       ├── exp006/
-│       │   ├── setup/
-│       │   ├── config/
-│       │   └── verification/
-│       ├── exp007/
-│       └── exp008/
+│   ├── Exp001/
+│   │   ├── exp001-pfsense-firewall-rules.md
+│   │   └── images/
+│   ├── Exp002/
+│   │   ├── exp002-ssh-hardening.md
+│   │   └── images/
+│   ├── Exp003/
+│   │   ├── exp003-fail2ban.md
+│   │   └── images/
+│   ├── Exp004/
+│   │   ├── exp004-splunk-siem.md
+│   │   └── images/
+│   ├── Exp005/
+│   │   ├── exp005-nessus-vulnerability-scan.md
+│   │   └── images/
+│   ├── Exp006/
+│   │   ├── exp006-active-directory.md
+│   │   └── Setup Images/
+│   │       ├── Config/
+│   │       ├── Network Config/
+│   │       └── Verification/
+│   ├── Exp007/
+│   │   ├── exp007-azure-sentinel.md
+│   │   └── images/
+│   ├── Exp008/
+│   │   ├── exp008-pihole-dns-sinkhole.md
+│   │   └── images/
+│   ├── Exp009/
+│   │   ├── exec-summary.md
+│   │   ├── runbook-fail2ban-restart.md
+│   │   ├── sitrep-template.md
+│   │   └── images/
+│   ├── Exp010/
+│   │   ├── exp010-wazuh-edr.md
+│   │   └── images/
+│   └── setup/                            ← initial Ubuntu host setup screenshots
 ├── labs/
-│   └── lab01-win11-setup/
-│       └── images/
+│   └── Lab01-win11-setup/
+│       └── Images/
 │           ├── setup/
 │           └── verification/
 └── incident-reports/
