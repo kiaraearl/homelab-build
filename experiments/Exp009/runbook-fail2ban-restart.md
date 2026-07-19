@@ -40,6 +40,8 @@
 6. **Log the action**
    - Update the ticket/incident record with: "fail2ban service restarted on Ubuntu-Server-01. Service confirmed active, sshd jail confirmed running."
 
+![fail2ban restart, active status, and sshd jail confirmation](images/exp009-01-fail2ban-restart.png)
+
 ---
 
 ## Escalation Trigger

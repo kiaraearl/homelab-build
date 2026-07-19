@@ -81,6 +81,8 @@ findtime = 300
 sudo fail2ban-client status sshd
 ```
 
+![fail2ban sshd jail active, 0 currently banned](images/exp003-01-jail-active.png)
+
 Log confirmed:
 ```
 maxRetry: 3
@@ -89,6 +91,8 @@ banTime: 600
 Added logfile: '/var/log/auth.log'
 Jail 'sshd' started
 ```
+
+![fail2ban startup log confirming jail config](images/exp003-03-config-verified.png)
 
 ---
 
@@ -108,6 +112,10 @@ Result from fail2ban.log:
 00:55:36 - NOTICE [sshd] Ban 192.168.56.1
 ```
 
+![fail2ban ban fired on 3rd attempt](images/exp003-02-ban-fired.png)
+
+![fail2ban.log matching the ban timestamps above](images/exp003-04-clean-ban.png)
+
 Ban fired on exactly the 3rd attempt within 4 seconds.
 
 **Note:** The ban dropped the active SSH session — all connections from a banned IP are terminated immediately including existing sessions. Recovery required direct console access to unban.
@@ -123,13 +131,6 @@ Final status:
 
 ---
 
-## Screenshots
-- `images/exp003-01-jail-active.png`
-- `images/exp003-02-ban-fired.png`
-- `images/exp003-03-config-verified.png`
-- `images/exp003-04-clean-ban.png`
-
----
 
 ## Lessons Learned
 - fail2ban adds dynamic threat response on top of static firewall rules

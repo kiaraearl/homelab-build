@@ -63,14 +63,12 @@ SSH is the most commonly targeted remote access service on Linux systems. Defaul
 sudo sshd -T | grep -E "port|permitrootlogin|maxauthtries|logingracetime|x11forwarding"
 ```
 
+![Hardened SSH settings confirmed live](images/exp002-01-ssh-hardening-verified.png)
+
 - Tested password login with `-o PreferredAuthentications=password` — returned `Permission denied (publickey)`
 - Confirmed key-based login works with passphrase
 
----
-
-## Screenshots
-- `images/exp002-01-ssh-hardening-verified.png` — hardening settings confirmed live
-- `images/exp002-02-ssh-password-disabled.png` — password authentication rejected
+![Password authentication rejected](images/exp002-02-ssh-password-disabled.png)
 
 ---
 

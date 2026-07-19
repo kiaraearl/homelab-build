@@ -19,7 +19,7 @@ Stand up a free Okta developer tenant, configure a SAML 2.0 application from scr
 
 Signed up for Okta's **Integrator Free Plan** (no expiration, unlike the 30-day Okta Platform trial). Hit a real onboarding blocker worth documenting in full (see Troubleshooting): business-email requirement, a domain typo, a stuck MFA activation, and a blank-screen re-activation link. Resolved by installing the **Okta Verify desktop app for Windows** rather than relying on a phone, which unblocked account activation.
 
-`exp011-01-idp-dashboard.png` - Applications home / dashboard after successful login.
+![Okta Applications home dashboard after successful login](images/exp011-01-idp-dashboard.png)
 
 ### 2. SAML 2.0 App Registration
 
@@ -34,13 +34,13 @@ Configured the SP-side values as a fictional, non-resolving service provider (st
 | Name ID format | EmailAddress |
 | Application username | Email |
 
-`exp011-02-saml-app-config.png` - completed General Settings / Configure SAML screen.
+![Completed General Settings / Configure SAML screen](images/exp011-02-saml-app-config.png)
 
 ### 3. SAML Assertion Preview
 
 The Integrator Free wizard doesn't expose a separate Attribute Statements mapping table (see Troubleshooting), but does include a **"Preview the SAML Assertion"** feature that renders the actual XML Okta would generate for a login. Used this to verify the assertion structure: `NameID` (email format), `SubjectConfirmationData` with `Recipient` matching the configured ACS URL, `AudienceRestriction` matching the configured Entity ID, and `AuthnContextClassRef` set to `PasswordProtectedTransport`.
 
-`exp011-04-attribute-mapping.png` - generated SAML assertion XML preview.
+![Generated SAML assertion XML preview](images/exp011-04-attribute-mapping.png)
 
 ### 4. IdP Metadata Review
 
@@ -53,7 +53,7 @@ On the app's **Sign On** tab, expanded "More details" under Metadata to review t
 
 This is the exchange a real SP admin would need from the IdP side to complete a two-way SAML trust relationship - Okta explicitly notes SSO "will not work until you configure the app to trust Okta as an IdP," confirming this is a one-sided (IdP-only) setup by design for this lab.
 
-`exp011-03-sp-metadata.png` - expanded Sign On tab showing full IdP metadata.
+![Expanded Sign On tab showing full IdP metadata](images/exp011-03-sp-metadata.png)
 
 ### 5. User Assignment and Live Login Test
 
@@ -63,7 +63,7 @@ Assigned my own user (Kiara Earl) to the app under the **Assignments** tab, then
 
 This is the expected and correct outcome for a demo without a live SP: it confirms the IdP-side flow (authentication → assertion generation → redirect/POST to the registered ACS URL) worked exactly as configured. The failure point is the fictional SP, not the IdP configuration.
 
-`exp011-05-test-login.png` - browser "Server Not Found" at the ACS URL, confirming Okta correctly posted the assertion.
+![Browser "Server Not Found" at the ACS URL, confirming Okta posted the assertion](images/exp011-05-test-login.png)
 
 ---
 

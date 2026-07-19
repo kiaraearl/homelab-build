@@ -54,6 +54,12 @@ Ubuntu-Server-01 (192.168.56.10)
 - Windows Firewall rule added: Splunk Receiver 9997 (TCP inbound)
 - Credentials: [see Bitwarden — "Splunk Enterprise - Home Lab"]
 
+![Splunk Enterprise login page](images/exp004-01-splunk-login.png)
+
+![Receiving port 9997 enabled](images/exp004-02-splunk-receiving-port.png)
+
+![Windows Firewall rule for Splunk Receiver 9997](images/exp004-03-splunk-firewall-rule.png)
+
 ### Universal Forwarder (Ubuntu)
 - Installed to: /opt/splunkforwarder
 - Forward server: 192.168.56.1:9997
@@ -89,6 +95,14 @@ Result:
 - fail2ban detected attempts and banned 192.168.56.1
 - Ban event shipped to Splunk via forwarder
 
+![First auth.log events arriving in Splunk](images/exp004-04-splunk-first-events.png)
+
+![Failed SSH password events in Splunk](images/exp004-05-splunk-failed-password-events.png)
+
+![fail2ban.log showing the ban fire locally on Ubuntu](images/exp004-06-fail2ban-ban-event.png)
+
+![fail2ban ban/unban events ingested into Splunk](images/exp004-07-splunk-fail2ban-events.png)
+
 Re-hardened immediately after test:
 ```bash
 sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
@@ -121,6 +135,10 @@ index=main sourcetype=linux_secure "Failed password" | timechart count by host
 - **Panel:** Failed SSH Attempts Over Time (Column Chart)
 - Shows brute force spike at time of simulated attack
 
+![Column chart visualization of failed SSH attempts by host](images/exp004-08-splunk-dashboard-chart.png)
+
+![Final SSH Attack Monitor dashboard panel](images/exp004-09-splunk-dashboard-final.png)
+
 ---
 
 ## Alert Created
@@ -131,19 +149,7 @@ index=main sourcetype=linux_secure "Failed password" | timechart count by host
 - **Action:** Add to Triggered Alerts
 - **Query:** `index=main sourcetype=fail2ban "Ban"`
 
----
-
-## Screenshots
-- `images/exp004-01-splunk-login.png`
-- `images/exp004-02-splunk-receiving-port.png`
-- `images/exp004-03-splunk-firewall-rule.png`
-- `images/exp004-04-splunk-first-events.png`
-- `images/exp004-05-splunk-failed-password-events.png`
-- `images/exp004-06-fail2ban-ban-event.png`
-- `images/exp004-07-splunk-fail2ban-events.png`
-- `images/exp004-08-splunk-dashboard-chart.png`
-- `images/exp004-09-splunk-dashboard-final.png`
-- `images/exp004-10-splunk-alert-setup.png`
+![fail2ban Ban Detected alert configuration](images/exp004-10-splunk-alert-setup.png)
 
 ---
 

@@ -46,13 +46,13 @@ sudo ufw allow 1515/tcp   # agent enrollment
 sudo ufw allow 443/tcp    # dashboard web interface
 ```
 
-`images/exp010-01-wazuh-install-complete.png`
+![Wazuh install complete and firewall ports opened](images/exp010-01-wazuh-install-complete.png)
 
 ### Step 2 — Dashboard Access
 
 Logged into the Wazuh dashboard at `https://192.168.56.10` with the auto-generated `admin` credentials, then rotated the password to something memorable (with corresponding updates to the indexer and dashboard keystores — see Troubleshooting).
 
-`images/exp010-02-wazuh-dashboard-login.png`
+![Wazuh dashboard overview after login](images/exp010-02-wazuh-dashboard-login.png)
 
 ### Step 3 — Self-Monitoring (Manager as Agent)
 
@@ -84,7 +84,7 @@ NET START WazuhSvc
 
 Agent connected successfully within ~15 seconds.
 
-`images/exp010-03-agent-win11-active.png`
+![WS01 Windows 11 agent shown active in Wazuh](images/exp010-03-agent-win11-active.png)
 
 ### Step 5 — File Integrity Monitoring (FIM) Test
 
@@ -102,7 +102,7 @@ New-Item -Path "$env:PROGRAMDATA\Microsoft\Windows\Start Menu\Programs\Startup\w
 
 Confirmed the "File added" event appeared in the dashboard within seconds (Rule 554).
 
-`images/exp010-04-fim-event-triggered.png`
+![FIM "File added" event, Rule 554, in the Wazuh dashboard](images/exp010-04-fim-event-triggered.png)
 
 ### Step 6 — Brute-Force Detection and Active Response
 
@@ -114,9 +114,11 @@ for ($i=1; $i -le 12; $i++) { ssh -p 2222 wronguser@192.168.56.10 }
 
 Wazuh's built-in ruleset correctly escalated from individual "Invalid user" alerts (Rule 5710) to a brute-force detection (**Rule 5712**, level 10) once the frequency threshold was met (8 failed attempts within 120 seconds from the same source IP). The alert carried full MITRE ATT&CK mapping (**T1110 — Brute Force**, tactic: Credential Access) and compliance tags for PCI DSS, GDPR, HIPAA, and NIST 800-53.
 
-`images/exp010-05-brute-force-detected.png`
-`images/exp010-06-rule-5712-mitre-detail.png`
-`images/exp010-07-alert-raw-fields.png`
+![Escalation from Rule 5710 (invalid user) to Rule 5712 (brute force)](images/exp010-05-brute-force-detected.png)
+
+![Rule 5712 detail — MITRE T1110 Brute Force, compliance tags](images/exp010-06-rule-5712-mitre-detail.png)
+
+![Raw alert fields for the Rule 5712 event](images/exp010-07-alert-raw-fields.png)
 
 **Active Response:** Configured Wazuh to automatically block the offending IP using the built-in `firewall-drop` command, triggered specifically by Rule 5712:
 
@@ -131,7 +133,7 @@ Wazuh's built-in ruleset correctly escalated from individual "Invalid user" aler
 
 After correcting a configuration bug (see Troubleshooting), re-running the brute-force test confirmed Active Response fired correctly: the attacking IP was added to `iptables` as a `DROP` rule for 600 seconds, and the block event appeared in the dashboard as **Rule 651 — "Host Blocked by firewall-drop Active Response."**
 
-`images/exp010-08-active-response-blocked.png`
+![Rule 651 — Host Blocked by firewall-drop Active Response](images/exp010-08-active-response-blocked.png)
 
 **Note on tool interaction:** An initial test attempt was inadvertently blocked by **fail2ban** (configured in Exp003) before Wazuh's own threshold could be reached — fail2ban's `maxretry: 3` fired faster than Wazuh's 8-attempt correlation window. This was a useful finding: multiple detection/response tools running on the same host can race each other, and the faster-triggering tool wins. fail2ban was temporarily stopped to isolate and properly test Wazuh's Active Response in isolation, then re-enabled afterward.
 
@@ -148,8 +150,9 @@ Results for WS01 (Windows 11 Pro):
 | Medium | 57 |
 | Low | 1 |
 
-`images/exp010-09-vulnerability-detection-summary.png`
-`images/exp010-10-critical-cves-list.png`
+![Vulnerability Detection summary for WS01 — 7 critical, 219 high](images/exp010-09-vulnerability-detection-summary.png)
+
+![List of critical CVEs detected on WS01](images/exp010-10-critical-cves-list.png)
 
 **Cross-reference with Exp005 (Nessus):** Exp005's credentialed and unauthenticated Nessus scans were run exclusively against Ubuntu-Server-01, finding zero vulnerabilities on that host. Wazuh's Vulnerability Detection module, in this deployment, did not surface results for Agent 000 (the manager's local/self-monitoring agent) — likely a scope limitation of self-scanning the manager host in this Wazuh version. As a result, a true same-host comparison between Nessus and Wazuh wasn't possible in this pass.
 

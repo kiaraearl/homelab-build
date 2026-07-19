@@ -27,6 +27,8 @@ Microsoft Sentinel analytics rule (High severity, MITRE ATT&CK T1110 - Brute For
 | 09:30 | pfSense rule updated — source IP blocked at firewall level |
 | 09:35 | Confirmed no further auth attempts; incident resolved |
 
+![ServiceNow incident INC0010007 showing Resolved state and work notes timeline](images/exp009-02-incident-resolved.png)
+
 ## 4. Current Status
 **Resolved.** Source IP blocked at perimeter (pfSense) in addition to host-level fail2ban ban. No data compromise. Monitoring continues for repeat activity from related IP ranges.
 

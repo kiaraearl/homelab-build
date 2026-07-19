@@ -152,6 +152,8 @@ The installer will launch a terminal GUI. Work through each screen:
 
 Installation completes with your admin password displayed. Write it down.
 
+![Pi-hole installation complete screen with admin password](images/exp008-01-pihole-install-complete.png)
+
 ---
 
 ### Step 5 — Change Admin Password
@@ -179,6 +181,8 @@ Log in with your password. You'll see:
 - **Domains on Lists:** 81,382
 - **Query Log:** live DNS traffic from all clients
 
+![Pi-hole dashboard — active, 81,382 domains on lists](images/exp008-02-pihole-dashboard.png)
+
 ---
 
 ### Step 7 — Point Lab Devices to Pi-hole
@@ -190,6 +194,8 @@ To have Pi-hole filter traffic from WS01:
 3. Save
 
 WS01 will now appear in the Pi-hole query log as client `192.168.56.30`.
+
+![Live query log showing traffic from WS01 and host](images/exp008-03-pihole-query-log-live.png)
 
 ---
 
@@ -222,16 +228,6 @@ ipconfig /flushdns
 | Query log showing traffic from WS01 (192.168.56.30) | Pass |
 | Query log showing traffic from host (192.168.56.1) | Pass |
 | YouTube domains whitelisted and functional | Pass |
-
----
-
-## Screenshots
-
-| File | Description |
-|---|---|
-| `exp008-01-pihole-install-complete.png` | Installation complete screen showing admin password |
-| `exp008-02-pihole-dashboard.png` | Pi-hole dashboard — active, 81,382 domains blocked |
-| `exp008-03-pihole-query-log-live.png` | Live query log showing traffic from WS01 and host |
 
 ---
 

@@ -53,10 +53,7 @@ Firewalls are the first line of defense in any network. The default pfSense rule
 - Pinged pfSense (192.168.56.2) from Ubuntu — 128/128 packets received, 0% packet loss
 - SSH to Ubuntu on port 2222 still works through firewall
 
----
-
-## Screenshots
-- `images/exp001-01-pfsense-firewall-rules.png` — final ruleset with default rules disabled
+![Final pfSense LAN ruleset with default rules disabled](images/exp001-01-pfsense-firewall-rules.png)
 
 ---
 
