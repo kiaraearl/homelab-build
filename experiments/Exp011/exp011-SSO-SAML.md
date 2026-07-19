@@ -124,10 +124,13 @@ SSO/SAML shows up directly in Tier 1 support and IAM-adjacent postings - not as 
 
 ---
 
+## Related Experiments
+
+- [Exp006 — Active Directory](../Exp006/exp006-active-directory.md) - the on-prem IAM counterpart to this cloud IdP
+- [Exp007 — Azure Sentinel](../Exp007/exp007-azure-sentinel.md) - other cloud identity/security tooling in the lab
+
 ## Related Notes
 
-- [[Homelab-Exp006-AD-DS|Active Directory DS]] - the on-prem IAM counterpart to this cloud IdP
-- [[Homelab-Exp007-Azure-Sentinel|Azure Sentinel]] - other cloud identity/security tooling in the lab
 - [[Homelab-Lab-Notes|Home Lab Notes]]
 - [[Cybersecurity-SOC-Path]]
 - [[MOC-Home-Lab]]
