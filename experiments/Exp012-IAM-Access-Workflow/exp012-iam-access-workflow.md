@@ -9,7 +9,7 @@
 
 ## Objective
 
-Document a full, realistic access request lifecycle for provisioning and later deprovisioning a user to a third-party platform - request intake, identity verification, provisioning (AD account + access group), live access verification, and formal offboarding - using a fictional third-party platform ("ClaimStream") accessed via VPN/jump-host rather than direct login. This builds directly on [Exp006](../Exp006/exp006-active-directory.md)'s AD/lab.local foundation and mirrors the shape of IAM-adjacent support tickets (including EMR-style access requests) common in Tier 1/help desk postings, without naming a specific regulated platform.
+Document a full, realistic access request lifecycle for provisioning and later deprovisioning a user to a third-party platform - request intake, identity verification, provisioning (AD account + access group), live access verification, and formal offboarding - using a fictional third-party platform ("ClaimStream") accessed via VPN/jump-host rather than direct login. This builds directly on [Exp006](../Exp006-Active-Directory/exp006-active-directory.md)'s AD/lab.local foundation and mirrors the shape of IAM-adjacent support tickets (including EMR-style access requests) common in Tier 1/help desk postings, without naming a specific regulated platform.
 
 ---
 
@@ -86,7 +86,7 @@ Resolved INC0010009 with a resolution note confirming the account was disabled a
 
 This lab surfaced a genuine, multi-step troubleshooting scenario during Stage 4's access verification - not manufactured, discovered mid-lab:
 
-1. **"Domain isn't available" on RDP login despite the target and DC being pingable.** Initial RDP attempt to WS01 failed with a domain-unavailable error even though `ping 192.168.56.20` (DC01) succeeded cleanly. Root cause, found via `ipconfig /all`: WS01's primary DNS server was pointed at **Pi-hole** ([Exp008](../Exp008/exp008-pihole-dns-sinkhole.md), 192.168.56.40) rather than DC01. Domain authentication depends on DNS to *locate* the domain controller (SRV records, not just basic name resolution) - Pi-hole only forwards to its upstream (Cloudflare) and has no knowledge of `lab.local`'s internal AD records. Full network reachability (ping) does not imply domain discoverability - a distinction that matters directly for real "I can't log in but the network's fine" tickets.
+1. **"Domain isn't available" on RDP login despite the target and DC being pingable.** Initial RDP attempt to WS01 failed with a domain-unavailable error even though `ping 192.168.56.20` (DC01) succeeded cleanly. Root cause, found via `ipconfig /all`: WS01's primary DNS server was pointed at **Pi-hole** ([Exp008](../Exp008-Pihole-DNS-Sinkhole/exp008-pihole-dns-sinkhole.md), 192.168.56.40) rather than DC01. Domain authentication depends on DNS to *locate* the domain controller (SRV records, not just basic name resolution) - Pi-hole only forwards to its upstream (Cloudflare) and has no knowledge of `lab.local`'s internal AD records. Full network reachability (ping) does not imply domain discoverability - a distinction that matters directly for real "I can't log in but the network's fine" tickets.
    - **Fix:** set WS01's preferred DNS to `192.168.56.20` (DC01), keeping Pi-hole as a secondary/alternate DNS server so ad-blocking is preserved for general browsing without breaking domain lookups.
 
 ![WS01 DNS settings fixed — preferred 192.168.56.20 (DC01), alternate 192.168.56.40 (Pi-hole)](images/exp012-05-dns-fix.png)
@@ -139,10 +139,10 @@ This is the workflow shape that sits behind most "user can't access [third-party
 
 ## Related Experiments
 
-- [Exp006 — Active Directory](../Exp006/exp006-active-directory.md) - the AD foundation this lab provisions against
-- [Exp008 — Pi-hole DNS Sinkhole](../Exp008/exp008-pihole-dns-sinkhole.md) - the DNS server that caused the domain-discovery issue
-- [Exp009 — CIC Incident Operations](../Exp009/sitrep-template.md)
-- [Exp011 — SSO/SAML Dev Tenant Demo (Okta)](../Exp011/exp011-SSO-SAML.md) - the IdP-side counterpart to this on-prem AD access workflow
+- [Exp006 — Active Directory](../Exp006-Active-Directory/exp006-active-directory.md) - the AD foundation this lab provisions against
+- [Exp008 — Pi-hole DNS Sinkhole](../Exp008-Pihole-DNS-Sinkhole/exp008-pihole-dns-sinkhole.md) - the DNS server that caused the domain-discovery issue
+- [Exp009 — CIC Incident Operations](../Exp009-CIC-Incident-Operations/exp009-cic-incident-ops-sitrep-template.md)
+- [Exp011 — SSO/SAML Dev Tenant Demo (Okta)](../Exp011-SSO-SAML-Okta/exp011-sso-saml.md) - the IdP-side counterpart to this on-prem AD access workflow
 
 ## GitHub
 https://github.com/kiaraearl/homelab-build/tree/main/experiments/Exp012

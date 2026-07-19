@@ -239,10 +239,10 @@ Result: 304 events, host = DC01
 
 ## Related Experiments
 
-- [Exp001 — pfSense Firewall Rules](../Exp001/exp001-pfsense-firewall-rules.md)
-- [Exp002 — SSH Hardening](../Exp002/exp002-ssh-hardening.md)
-- [Exp003 — fail2ban](../Exp003/exp003-fail2ban.md)
-- [Exp004 — Splunk SIEM](../Exp004/exp004-splunk-siem.md)
-- [Exp005 — Nessus Vulnerability Scan](../Exp005/exp005-nessus-vulnerability-scan.md)
-- [Exp011 — SSO/SAML Dev Tenant Demo (Okta)](../Exp011/exp011-SSO-SAML.md)
-- [Exp012 — IAM Access Request Workflow](../Exp012/exp012-IAM-Access-Workflow.md)
+- [Exp001 — pfSense Firewall Rules](../Exp001-pfSense-Firewall-Rules/exp001-pfsense-firewall-rules.md)
+- [Exp002 — SSH Hardening](../Exp002-SSH-Hardening/exp002-ssh-hardening.md)
+- [Exp003 — fail2ban](../Exp003-Fail2Ban-Intrusion-Prevention/exp003-fail2ban.md)
+- [Exp004 — Splunk SIEM](../Exp004-Splunk-SIEM/exp004-splunk-siem.md)
+- [Exp005 — Nessus Vulnerability Scan](../Exp005-Nessus-Vulnerability-Scan/exp005-nessus-vulnerability-scan.md)
+- [Exp011 — SSO/SAML Dev Tenant Demo (Okta)](../Exp011-SSO-SAML-Okta/exp011-sso-saml.md)
+- [Exp012 — IAM Access Request Workflow](../Exp012-IAM-Access-Workflow/exp012-iam-access-workflow.md)

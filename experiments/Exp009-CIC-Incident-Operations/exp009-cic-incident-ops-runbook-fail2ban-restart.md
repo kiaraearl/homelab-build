@@ -55,5 +55,5 @@ Not applicable — this runbook only restarts the service and does not modify co
 ---
 
 ## Related Documentation
-- [Exp003: fail2ban Intrusion Prevention](../Exp003/exp003-fail2ban.md) — initial configuration and jail setup
+- [Exp003: fail2ban Intrusion Prevention](../Exp003-Fail2Ban-Intrusion-Prevention/exp003-fail2ban.md) — initial configuration and jail setup
 - [Exp009: CIC Incident Operations](./) — SITREP referencing this runbook

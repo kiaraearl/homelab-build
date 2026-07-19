@@ -1,7 +1,7 @@
 # Home Lab — Notes & Config
 
 ## Lab Status
-Last Updated: May 31, 2026
+Last Updated: July 19, 2026
 
 ---
 
@@ -19,6 +19,9 @@ Last Updated: May 31, 2026
 | Exp008 | Pi-hole DNS Sinkhole | Complete | 2026-05-31 |
 | Exp009 | CIC Incident Operations | Complete | 2026-06-15 |
 | Exp010 | Wazuh EDR Deployment | Complete | 2026-07-17 |
+| Exp011 | SSO/SAML Dev Tenant Demo (Okta) | Complete | 2026-07-19 |
+| Exp012 | IAM Access Request Workflow | Complete | 2026-07-18 |
+| Exp013 | Zendesk Support Operations Lab | Complete | 2026-07-19 |
 
 Full write-ups in `/experiments/`
 
@@ -360,6 +363,7 @@ sudo pihole restartdns       # restart DNS service
 | 6 | Active Directory (Exp006) | Identity & access management, AD event monitoring in Splunk |
 | 7 | Azure Sentinel (Exp007) | Cloud SIEM, hybrid log ingestion, KQL hunting, automated detection |
 | 8 | Pi-hole DNS Sinkhole (Exp008) | Blocks 81,382 ad/tracking/malicious domains at DNS level |
+| 9 | Wazuh EDR (Exp010) | Endpoint detection & response — FIM, brute-force detection, Active Response |
 
 ---
 

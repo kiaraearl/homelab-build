@@ -217,6 +217,9 @@ reproducible, and portfolio-ready.
 | **Microsoft Sentinel** | Cloud SIEM — KQL hunting, analytics rules, incident management | Complete |
 | **Azure Arc** | Hybrid cloud — on-prem server management from Azure | Complete |
 | **Pi-hole** | DNS sinkhole — network-wide ad and malicious domain blocking | Complete |
+| **Wazuh** | EDR — FIM, brute-force detection, Active Response, vulnerability scanning | Complete |
+| **Okta** | IdP / SSO — SAML dev tenant configuration | Complete |
+| **Zendesk** | Support ticketing — SLA policy, escalation automation | Complete |
 | **Wireshark** | Network traffic analysis | Future |
 | **Snort / Suricata** | IDS/IPS practice | Future |
 | **Kali Linux** | Offensive security tooling | Future |
@@ -227,16 +230,19 @@ reproducible, and portfolio-ready.
 
 | # | Experiment | Status | Write-Up |
 |---|---|---|---|
-| 001 | pfSense firewall rule configuration — default deny ruleset | Complete | [View](experiments/Exp001/exp001-pfsense-firewall-rules.md) |
-| 002 | SSH hardening — port 2222, key auth, disable root & passwords | Complete | [View](experiments/Exp002/exp002-ssh-hardening.md) |
-| 003 | fail2ban — SSH intrusion prevention, live ban test | Complete | [View](experiments/Exp003/exp003-fail2ban.md) |
-| 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | Complete | [View](experiments/Exp004/exp004-splunk-siem.md) |
-| 005 | Nessus — unauthenticated + credentialed vulnerability scan | Complete | [View](experiments/Exp005/exp005-nessus-vulnerability-scan.md) |
-| 006 | Active Directory — Windows Server 2022, lab.local domain, AD DS, Splunk integration | Complete | [View](experiments/Exp006/exp006-active-directory.md) |
-| 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | Complete | [View](experiments/Exp007/exp007-azure-sentinel.md) |
-| 008 | Pi-hole DNS Sinkhole — network-wide DNS filtering, 81k+ domain blocklist, live query monitoring | Complete | [View](experiments/Exp008/exp008-pihole-dns-sinkhole.md) |
-| 009 | CIC Incident Operations — SITREP, break/fix runbook, exec summary, ServiceNow lifecycle | Complete | [View](experiments/Exp009/sitrep-template.md) |
-| 010 | Wazuh EDR — Linux/Windows agent deployment, FIM, brute-force detection, Active Response, vulnerability scanning | Complete | [View](experiments/Exp010/exp010-wazuh-edr.md) |
+| 001 | pfSense firewall rule configuration — default deny ruleset | Complete | [View](experiments/Exp001-pfSense-Firewall-Rules/exp001-pfsense-firewall-rules.md) |
+| 002 | SSH hardening — port 2222, key auth, disable root & passwords | Complete | [View](experiments/Exp002-SSH-Hardening/exp002-ssh-hardening.md) |
+| 003 | fail2ban — SSH intrusion prevention, live ban test | Complete | [View](experiments/Exp003-Fail2Ban-Intrusion-Prevention/exp003-fail2ban.md) |
+| 004 | Splunk SIEM — log ingestion, dashboard, real-time alert | Complete | [View](experiments/Exp004-Splunk-SIEM/exp004-splunk-siem.md) |
+| 005 | Nessus — unauthenticated + credentialed vulnerability scan | Complete | [View](experiments/Exp005-Nessus-Vulnerability-Scan/exp005-nessus-vulnerability-scan.md) |
+| 006 | Active Directory — Windows Server 2022, lab.local domain, AD DS, Splunk integration | Complete | [View](experiments/Exp006-Active-Directory/exp006-active-directory.md) |
+| 007 | Microsoft Azure + Sentinel — cloud SIEM, Azure Arc, KQL hunting, brute force detection | Complete | [View](experiments/Exp007-Azure-Sentinel/exp007-azure-sentinel.md) |
+| 008 | Pi-hole DNS Sinkhole — network-wide DNS filtering, 81k+ domain blocklist, live query monitoring | Complete | [View](experiments/Exp008-Pihole-DNS-Sinkhole/exp008-pihole-dns-sinkhole.md) |
+| 009 | CIC Incident Operations — SITREP, break/fix runbook, exec summary, ServiceNow lifecycle | Complete | [View](experiments/Exp009-CIC-Incident-Operations/exp009-cic-incident-ops-sitrep-template.md) |
+| 010 | Wazuh EDR — Linux/Windows agent deployment, FIM, brute-force detection, Active Response, vulnerability scanning | Complete | [View](experiments/Exp010-Wazuh-EDR/exp010-wazuh-edr.md) |
+| 011 | SSO/SAML Dev Tenant Demo (Okta) — IdP-side SSO configuration | Complete | [View](experiments/Exp011-SSO-SAML-Okta/exp011-sso-saml.md) |
+| 012 | IAM Access Request Workflow — on-prem AD access request lifecycle | Complete | [View](experiments/Exp012-IAM-Access-Workflow/exp012-iam-access-workflow.md) |
+| 013 | Zendesk Support Operations Lab — ticketing, SLA policy, escalation automation | Complete | [View](experiments/Exp013-Zendesk-Support-Operations/exp013-Zendesk-Support-Operations-Lab.md) |
 
 ## Incident Reports
 
@@ -258,6 +264,7 @@ reproducible, and portfolio-ready.
 | 6 | Active Directory | Identity & access management, AD event monitoring in Splunk |
 | 7 | Microsoft Sentinel | Cloud SIEM — KQL detection, MITRE-mapped analytics rules, incident queue |
 | 8 | Pi-hole DNS Sinkhole | Blocks 81,382 known ad, tracking, and malicious domains at DNS level |
+| 9 | Wazuh EDR | Endpoint detection & response — FIM, brute-force detection, Active Response |
 
 ---
 
@@ -279,6 +286,10 @@ reproducible, and portfolio-ready.
 | Azure cloud fundamentals | AZ-900 |
 | Cloud security concepts | SC-900 |
 | Sentinel analytics rules, KQL, incident management | SC-200 |
+| Endpoint detection & response (Wazuh) | Security+ / CySA+ |
+| Federated identity, SSO/SAML (Okta) | Security+ / Help Desk |
+| IAM access request lifecycle | Security+ / Help Desk |
+| Ticketing, SLA management, escalation triage (Zendesk) | Help Desk / SOC |
 
 ---
 
@@ -289,40 +300,49 @@ homelab-build/
 ├── README.md
 ├── lab-notes.md                          ← VM specs, network config, credentials reference
 ├── experiments/
-│   ├── Exp001/
+│   ├── Exp001-pfSense-Firewall-Rules/
 │   │   ├── exp001-pfsense-firewall-rules.md
 │   │   └── images/
-│   ├── Exp002/
+│   ├── Exp002-SSH-Hardening/
 │   │   ├── exp002-ssh-hardening.md
 │   │   └── images/
-│   ├── Exp003/
+│   ├── Exp003-Fail2Ban-Intrusion-Prevention/
 │   │   ├── exp003-fail2ban.md
 │   │   └── images/
-│   ├── Exp004/
+│   ├── Exp004-Splunk-SIEM/
 │   │   ├── exp004-splunk-siem.md
 │   │   └── images/
-│   ├── Exp005/
+│   ├── Exp005-Nessus-Vulnerability-Scan/
 │   │   ├── exp005-nessus-vulnerability-scan.md
 │   │   └── images/
-│   ├── Exp006/
+│   ├── Exp006-Active-Directory/
 │   │   ├── exp006-active-directory.md
 │   │   └── Setup Images/
 │   │       ├── Config/
 │   │       ├── Network Config/
 │   │       └── Verification/
-│   ├── Exp007/
+│   ├── Exp007-Azure-Sentinel/
 │   │   ├── exp007-azure-sentinel.md
 │   │   └── images/
-│   ├── Exp008/
+│   ├── Exp008-Pihole-DNS-Sinkhole/
 │   │   ├── exp008-pihole-dns-sinkhole.md
 │   │   └── images/
-│   ├── Exp009/
-│   │   ├── exec-summary.md
-│   │   ├── runbook-fail2ban-restart.md
-│   │   ├── sitrep-template.md
+│   ├── Exp009-CIC-Incident-Operations/
+│   │   ├── exp009-cic-incident-ops-exec-summary.md
+│   │   ├── exp009-cic-incident-ops-runbook-fail2ban-restart.md
+│   │   ├── exp009-cic-incident-ops-sitrep-template.md
 │   │   └── images/
-│   ├── Exp010/
+│   ├── Exp010-Wazuh-EDR/
 │   │   ├── exp010-wazuh-edr.md
+│   │   └── images/
+│   ├── Exp011-SSO-SAML-Okta/
+│   │   ├── exp011-sso-saml.md
+│   │   └── images/
+│   ├── Exp012-IAM-Access-Workflow/
+│   │   ├── exp012-iam-access-workflow.md
+│   │   └── images/
+│   ├── Exp013-Zendesk-Support-Operations/
+│   │   ├── exp013-Zendesk-Support-Operations-Lab.md
 │   │   └── images/
 │   └── setup/                            ← initial Ubuntu host setup screenshots
 ├── labs/

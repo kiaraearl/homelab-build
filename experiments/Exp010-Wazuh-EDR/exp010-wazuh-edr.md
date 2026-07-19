@@ -204,7 +204,7 @@ This experiment demonstrates:
 
 ## Related Experiments
 
-- [Exp003 — SSH Hardening & fail2ban](../Exp003/exp003-fail2ban.md)
-- [Exp005 — Nessus Vulnerability Scanning](../Exp005/exp005-nessus-vulnerability-scan.md)
-- [Exp007 — Microsoft Sentinel](../Exp007/exp007-azure-sentinel.md)
-- [Exp009 — CIC Incident Operations](../Exp009/sitrep-template.md)
+- [Exp003 — SSH Hardening & fail2ban](../Exp003-Fail2Ban-Intrusion-Prevention/exp003-fail2ban.md)
+- [Exp005 — Nessus Vulnerability Scanning](../Exp005-Nessus-Vulnerability-Scan/exp005-nessus-vulnerability-scan.md)
+- [Exp007 — Microsoft Sentinel](../Exp007-Azure-Sentinel/exp007-azure-sentinel.md)
+- [Exp009 — CIC Incident Operations](../Exp009-CIC-Incident-Operations/exp009-cic-incident-ops-sitrep-template.md)

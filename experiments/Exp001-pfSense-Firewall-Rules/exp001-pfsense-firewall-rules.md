@@ -73,8 +73,8 @@ Firewalls are the first line of defense in any network. The default pfSense rule
 
 ## Related Experiments
 
-- [Exp002 — SSH Hardening](../Exp002/exp002-ssh-hardening.md)
-- [Exp003 — fail2ban](../Exp003/exp003-fail2ban.md)
-- [Exp004 — Splunk SIEM](../Exp004/exp004-splunk-siem.md)
-- [Exp005 — Nessus Vulnerability Scan](../Exp005/exp005-nessus-vulnerability-scan.md)
-- [Exp006 — Active Directory](../Exp006/exp006-active-directory.md)
+- [Exp002 — SSH Hardening](../Exp002-SSH-Hardening/exp002-ssh-hardening.md)
+- [Exp003 — fail2ban](../Exp003-Fail2Ban-Intrusion-Prevention/exp003-fail2ban.md)
+- [Exp004 — Splunk SIEM](../Exp004-Splunk-SIEM/exp004-splunk-siem.md)
+- [Exp005 — Nessus Vulnerability Scan](../Exp005-Nessus-Vulnerability-Scan/exp005-nessus-vulnerability-scan.md)
+- [Exp006 — Active Directory](../Exp006-Active-Directory/exp006-active-directory.md)

@@ -126,9 +126,9 @@ SSO/SAML shows up directly in Tier 1 support and IAM-adjacent postings - not as 
 
 ## Related Experiments
 
-- [Exp006 — Active Directory](../Exp006/exp006-active-directory.md) - the on-prem IAM counterpart to this cloud IdP
-- [Exp007 — Azure Sentinel](../Exp007/exp007-azure-sentinel.md) - other cloud identity/security tooling in the lab
-- [Exp012 — IAM Access Request Workflow](../Exp012/exp012-IAM-Access-Workflow.md) - the on-prem access request lifecycle this IdP-side setup complements
+- [Exp006 — Active Directory](../Exp006-Active-Directory/exp006-active-directory.md) - the on-prem IAM counterpart to this cloud IdP
+- [Exp007 — Azure Sentinel](../Exp007-Azure-Sentinel/exp007-azure-sentinel.md) - other cloud identity/security tooling in the lab
+- [Exp012 — IAM Access Request Workflow](../Exp012-IAM-Access-Workflow/exp012-iam-access-workflow.md) - the on-prem access request lifecycle this IdP-side setup complements
 
 ## GitHub
 https://github.com/kiaraearl/homelab-build/tree/main/experiments/Exp011

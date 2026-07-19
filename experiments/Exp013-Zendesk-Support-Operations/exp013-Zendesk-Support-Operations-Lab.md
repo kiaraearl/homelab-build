@@ -169,8 +169,8 @@ The MacStadium Technical Support Specialist posting names Zendesk directly as a 
 
 ## Related Experiments
 
-- [Exp009 — CIC Incident Operations](../Exp009/sitrep-template.md) - the ticket lifecycle and escalation documentation pattern this lab builds on, applied to a commercial ticketing platform instead of ServiceNow
-- [Exp012 — IAM Access Request Workflow](../Exp012/exp012-IAM-Access-Workflow.md) - the layered troubleshooting methodology (network → DNS → credentials → performance there; navigation → logic → form config → session → escalation logic here) carried into a different tool
+- [Exp009 — CIC Incident Operations](../Exp009-CIC-Incident-Operations/exp009-cic-incident-ops-sitrep-template.md) - the ticket lifecycle and escalation documentation pattern this lab builds on, applied to a commercial ticketing platform instead of ServiceNow
+- [Exp012 — IAM Access Request Workflow](../Exp012-IAM-Access-Workflow/exp012-iam-access-workflow.md) - the layered troubleshooting methodology (network → DNS → credentials → performance there; navigation → logic → form config → session → escalation logic here) carried into a different tool
 
 ## GitHub
 https://github.com/kiaraearl/homelab-build/tree/main/experiments/Exp013
