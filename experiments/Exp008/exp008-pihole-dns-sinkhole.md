@@ -284,3 +284,4 @@ ipconfig /flushdns
 - [Exp005 — Nessus Vulnerability Scan](../Exp005/exp005-nessus-vulnerability-scan.md)
 - [Exp006 — Active Directory](../Exp006/exp006-active-directory.md)
 - [Exp007 — Microsoft Azure + Sentinel](../Exp007/exp007-azure-sentinel.md)
+- [Exp012 — IAM Access Request Workflow](../Exp012/exp012-IAM-Access-Workflow.md)

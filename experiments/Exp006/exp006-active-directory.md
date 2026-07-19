@@ -245,3 +245,4 @@ Result: 304 events, host = DC01
 - [Exp004 — Splunk SIEM](../Exp004/exp004-splunk-siem.md)
 - [Exp005 — Nessus Vulnerability Scan](../Exp005/exp005-nessus-vulnerability-scan.md)
 - [Exp011 — SSO/SAML Dev Tenant Demo (Okta)](../Exp011/exp011-SSO-SAML.md)
+- [Exp012 — IAM Access Request Workflow](../Exp012/exp012-IAM-Access-Workflow.md)

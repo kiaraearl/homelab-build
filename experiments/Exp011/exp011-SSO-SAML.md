@@ -1,6 +1,6 @@
 # Homelab - Exp011: SSO/SAML Dev Tenant Demo (Okta)
 
-**Status:** ✅ Complete
+**Status:** Complete
 **Date:** 2026-07-19
 **Platform:** Okta Integrator Free Plan (dev tenant - houstonsigningsolutions.okta.com)
 **Cert:** Security+ / IAM / Help Desk & Support
@@ -128,6 +128,7 @@ SSO/SAML shows up directly in Tier 1 support and IAM-adjacent postings - not as 
 
 - [Exp006 — Active Directory](../Exp006/exp006-active-directory.md) - the on-prem IAM counterpart to this cloud IdP
 - [Exp007 — Azure Sentinel](../Exp007/exp007-azure-sentinel.md) - other cloud identity/security tooling in the lab
+- [Exp012 — IAM Access Request Workflow](../Exp012/exp012-IAM-Access-Workflow.md) - the on-prem access request lifecycle this IdP-side setup complements
 
 ## GitHub
 https://github.com/kiaraearl/homelab-build/tree/main/experiments/Exp011
